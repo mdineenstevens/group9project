@@ -1,0 +1,17 @@
+{
+  "name": "cs546_group9",
+  "version": "1.0.0",
+  "description": "This is made for the cs546 project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Hangyu Wang, Michael Dineen, Chenyu Tian, Liam Nagel",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.1.18"
+  }
+}
