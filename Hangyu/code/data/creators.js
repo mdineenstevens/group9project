@@ -1,7 +1,8 @@
 const mongoCollections = require("./config/mongoCollections");
 const creators = mongoCollections.creators;
+const bcrypt = require("bcrypt");
+const saltRounds = 16;
 const { ObjectId } = require('mongodb');
-
 const CHK = require('./dataCHK/checkers.js');
 
 async function registar(name, password){
@@ -13,6 +14,12 @@ async function registar(name, password){
     if (!password) throw "Please provide a valid password.";
 
   const creatorsCollection = await creators();
+  const user = await creatorsCollection.findOne({ name: name });
+  if (user !== null) throw "Sorry. This username is used.";
+
+  CHK.CHKPWType(password)
+
+  const hashedPassWord = await bcrypt.hash(password, saltRounds);
   //const postsCollection = await posts();
 
   let newId = new ObjectId();
@@ -20,7 +27,7 @@ async function registar(name, password){
   let newUser = {
     _id: newId,
     name: name,
-    password: password//,
+    password: hashedPassWord//,
     //quizQuestions: []
   };
 
@@ -30,7 +37,7 @@ async function registar(name, password){
   return newUser;
 }
 
-//registar("Duke","horse").then(result => console.log(result));
+// registar("Duke","WHYwhy1").then(result => console.log(result));
 
 async function login(name, password){
     
@@ -42,10 +49,17 @@ async function login(name, password){
 
     const creatorsCollection = await creators();
 
-    const user = await creatorsCollection.findOne({ name: name, password: password });
-    if (user === null) throw "Wrong User name or Password.";
+    const user = await creatorsCollection.findOne({ name: name });
+    if (user === null) throw "Please make sure your username.";
 
-    return user;
+    CHK.CHKPWType(password)
+
+    let cmp_password = await bcrypt.compare(password, user.password);
+    if(cmp_password === true){
+        return user;
+    }else{
+        throw `Please make sure your password.`
+    }
 }
 // login("Duke","horse").then(result => console.log(result));
 
@@ -64,12 +78,20 @@ async function infoUpdate(id, OldPassword, NewPassword){
 
     const creatorsCollection = await creators();
 
-    const user = await creatorsCollection.findOne({ _id: newid, password: OldPassword });
-    if (user === null) throw "Wrong Former Password.";
+    const user = await creatorsCollection.findOne({ _id: newid });
+    if (user === null) throw "No such user.";
+
+    let cmp_password = await bcrypt.compare(OldPassword, user.password);
+    if(cmp_password === false){
+        throw `Please make sure your former passward is right.`
+    }
+
+    CHK.CHKPWType(NewPassword)
+    const hashedPassWord = await bcrypt.hash(NewPassword, saltRounds);
 
     const updateResult = await creatorsCollection.findOneAndUpdate(
         { _id: newid },
-        { $set: {password: NewPassword} },
+        { $set: {password: hashedPassWord} },
         { returnOriginal: false }
     );
     if (!updateResult.ok) {
@@ -78,7 +100,7 @@ async function infoUpdate(id, OldPassword, NewPassword){
 
     return await getById(id);
 }
-// infoUpdate("5cb76659473f420f3f8f9ec7", "ho","the ho").then(result => console.log(result));
+// infoUpdate("5cc4db5b21a6f620d20b34a3", "WHYwhy1","WHYwhy2").then(result => console.log(result));
 
 async function getById(id){
 

@@ -1,5 +1,7 @@
 const mongoCollections = require("./config/mongoCollections");
 const candidates = mongoCollections.candidates;
+const bcrypt = require("bcrypt");
+const saltRounds = 16;
 const { ObjectId } = require('mongodb');
 const CHK = require('./dataCHK/checkers.js');
 
@@ -11,25 +13,31 @@ async function registar(name, password){
     if (!name) throw "Please provide a valid user name.";
     if (!password) throw "Please provide a valid password.";
 
-  const candidatesCollection = await candidates();
-  //const postsCollection = await posts();
+    const candidatesCollection = await candidates();
+    const user = await candidatesCollection.findOne({ name: name });
+    if (user !== null) throw "Sorry. This username is used.";
 
-  let newId = new ObjectId();
+    CHK.CHKPWType(password)
 
-  let newUser = {
-    _id: newId,
-    name: name,
-    password: password//,
-    //quizRecords: []
-  };
+    const hashedPassWord = await bcrypt.hash(password, saltRounds);
+    //const postsCollection = await posts();
 
-  const insertInfo = await candidatesCollection.insertOne(newUser);
-  if (insertInfo.insertedCount === 0) throw "Could not add user";
+    let newId = new ObjectId();
 
-  return newUser;
+    let newUser = {
+        _id: newId,
+        name: name,
+        password: hashedPassWord//,
+        //quizRecords: []
+    };
+
+    const insertInfo = await candidatesCollection.insertOne(newUser);
+    if (insertInfo.insertedCount === 0) throw "Could not add user";
+
+    return newUser;
 }
 
-// registar("Duke","horse").then(result => console.log(result));
+// registar("Hangyu Wang","HWang2019").then(result => console.log(result));
 
 async function login(name, password){
     
@@ -41,13 +49,21 @@ async function login(name, password){
 
     const candidatesCollection = await candidates();
 
-    const user = await candidatesCollection.findOne({ name: name, password: password });
-    if (user === null) throw "Wrong User name or Password.";
+    const user = await candidatesCollection.findOne({ name: name });
+    if (user === null) throw "Please make sure your username.";
 
-    return user;
+    CHK.CHKPWType(password)
+    
+    let cmp_password = await bcrypt.compare(password, user.password);
+    if(cmp_password === true){
+        return user;
+    }else{
+        throw `Please make sure your password.`
+    }
+    
 }
+// login("Dee","horseW1").then(result => console.log(result));
 
-// login("Duke","hore").then(result => console.log(result));
 async function infoUpdate(id, OldPassword, NewPassword){
 
     let newid = CHK.checkObjectId(id);
@@ -63,12 +79,20 @@ async function infoUpdate(id, OldPassword, NewPassword){
 
     const candidatesCollection = await candidates();
 
-    const user = await candidatesCollection.findOne({ _id: newid, password: OldPassword });
-    if (user === null) throw "Wrong Former Password.";
+    const user = await candidatesCollection.findOne({ _id: newid });
+    if (user === null) throw "No such user.";
+
+    let cmp_password = await bcrypt.compare(OldPassword, user.password);
+    if(cmp_password === false){
+        throw `Please make sure your former passward is right.`
+    }
+
+    CHK.CHKPWType(NewPassword)
+    const hashedPassWord = await bcrypt.hash(NewPassword, saltRounds);
 
     const updateResult = await candidatesCollection.findOneAndUpdate(
         { _id: newid },
-        { $set: {password: NewPassword} },
+        { $set: {password: hashedPassWord} },
         { returnOriginal: false }
     );
     if (!updateResult.ok) {
@@ -77,7 +101,7 @@ async function infoUpdate(id, OldPassword, NewPassword){
 
     return await getById(id);
 }
-//infoUpdate("5cb765e4291d400f38c1e08d", "hokre","hokre").then(result => console.log(result));
+// infoUpdate("5cc4d6a37ce4f420b3a322f2", "horseW1","horseW3").then(result => console.log(result));
 
 async function getById(id){
 

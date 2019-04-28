@@ -61,7 +61,7 @@ async function genQuiz(id, field){
 
     let outArr;
     if(QwithField.length <=5){
-        outArr = QwithField;
+        outArr = CHK.RandomN(QwithField, QwithField.length);
     }else{
         outArr = CHK.RandomN(QwithField,5)
     }
@@ -70,10 +70,21 @@ async function genQuiz(id, field){
 
     let QUIZ = await NewQuiz(id, field);
 
+    let NewOut = [];
+    for(let i=0; i < outArr.length; i = i+1){
+        let OneQ = {};
+        OneQ._id = outArr[i]._id;
+        OneQ.content = outArr[i].content;
+        temp_arr = outArr[i].answers.concat(outArr[i].options);
+        OneQ.option = CHK.RandomN(temp_arr, temp_arr.length)
+        NewOut.push(OneQ)
+        console.log(OneQ.option)
+    }
+
     return { Q_id: QUIZ._id,
-             Questions: outArr};
+             Questions: NewOut};
 }
-// genQuiz("5cba70f151c1172420c07ea2","of").then(result => console.log(result));
+// genQuiz("5cc52150c2f402221de5e50a","memory").then(result => console.log(result));
 
 async function getQuizById(QuizId){
     let newID = CHK.checkObjectId(QuizId);
@@ -100,7 +111,7 @@ async function getAllQuiz(id){
 
     return Allquizzes
 }
-getAllQuiz("5cba70f151c1172420c07ea2").then(result => console.log(result));
+// getAllQuiz("5cba70f151c1172420c07ea2").then(result => console.log(result));
 
 async function grade(Quiz_id, Submission){
 

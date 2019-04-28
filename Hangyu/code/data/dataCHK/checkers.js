@@ -59,13 +59,31 @@ function RandomN(arr, num){
   }
   return NewArr;
 }
-
 // RandomN([3,5,2,6,8,4,10], 3)
+
+function CHKPWType(str){
+  // Math.floor(Math.random() * (arr.length) );
+  let lenReq = (str.length >= 6 && str.length <= 12);
+  let numReq = (str.match(/[0-9]/g) !== null)
+  let letter1Req = (str.match(/[a-z]/g) !== null)
+  let letter2Req = (str.match(/[A-Z]/g) !== null)
+  let SpaceReq = (str.match(/[ \s ]/g) === null)
+  let otherReq = (str.match(/[0-9a-zA-Z]/g).length === str.length)
+  // console.log(str.match(/[0-9a-zA-Z]/g).length)
+  // console.log(str.length)
+  if(lenReq && numReq && letter1Req && letter2Req && SpaceReq && otherReq){
+    return str;
+  }
+  throw `Please make sure your password is valid.`
+}
+// console.log(CHKPWType("wH1wH1wH1wH1wH1"))
+
 
 module.exports = {
     CHKstring,
     checkObjectId,
     CHKarray,
     CHKStrInfo,
+    CHKPWType,
     RandomN
   }
