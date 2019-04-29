@@ -10,11 +10,12 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+    //get the register infomation(name,password,identity) frome request
     const RegisterInfo = req.body;
     const name = RegisterInfo.name;
     const password = RegisterInfo.password;
     const identity = RegisterInfo.identity;
-
+    //check the register infomation
     if(!RegisterInfo){
       res.status(400).json({ error: "You must provide Effective Input" }).end();
       return;
@@ -31,7 +32,7 @@ router.post("/", async (req, res) => {
         res.status(400).json({ error: "You must provide a Identity" }).end();
         return;
     }
-
+    //put the new user to database, return a json{}
     try{
           if(identity == 'candidates')
           {

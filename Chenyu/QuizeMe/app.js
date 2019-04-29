@@ -7,10 +7,11 @@ const configRoutes = require("./routes");
 
 const app = express();
 
-//Set static file directory
+//Use static file directory
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(cookieParser());
+//Use Session middleware
 app.use(session({
   name: 'quizeme',
   secret: '12345',
@@ -19,6 +20,7 @@ app.use(session({
   saveUninitialized:false,
 }));
 
+//Use bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
