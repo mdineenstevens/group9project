@@ -14,7 +14,7 @@ async function createQuestion(creator, content, answers, options){
     if (!content) throw "Please provide a description for the question.";
     if (!answers) throw "There should be at least one answer.";
     if (!options) throw "There should be at least.";
-
+ 
     if((answers.length + options.length < 4) || (answers.length + options.length > 6)){
         throw `Please make sure that there are 4~6 options.`;
     }
