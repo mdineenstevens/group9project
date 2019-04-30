@@ -5,7 +5,7 @@ const data = require("../data");
 const candidates = data.candidates;
 const creators = data.creators;
 router.get("/", async (req, res) => {
-    res.send('Login Page')
+    res.send('Login Page');
 });
 
 router.post("/", async (req, res) => {

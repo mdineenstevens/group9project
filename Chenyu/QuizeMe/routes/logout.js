@@ -5,6 +5,7 @@ router.get("/", async (req, res) => {
         //clean the session to logout
         req.session.user = null;
         req.session.identity = null;
+        req.session.userId = null;
         res.json(req.session);
 });
 
