@@ -2,33 +2,54 @@
 <html>
 
 <head>
-    <title>login page</title>
+    <title>signup page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
     <div class="container-fluid bg">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+            <!-- NAVBAR BRAND - Contains Logo for Navbar -->
+            <a class="navbar-brand">
                 <img src="quizme.jpg" width="30" height="30" alt="">
             </a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
+            <!-- Navbar Collapse Button (appears when navbar shrinks) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Content inside of Navbar -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <!-- Creates a new Nav-item on navbar -->
+                    <li class="nav-item">
+                        <!-- DROPDOWN "Features" Button -->
+                        <div class="dropdown">
+                            <button class="btn btn-md btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Features
+                            </button>
+                            <!-- Links inside of the features drop down menu -->
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- SIGN IN Button -->
+                <div class="spacer">
+                    <button class="btn btn-success btn-md" type="submit">SignIn</button>
+                </div>
+
+            </div>
         </nav>
         <div class="d-flex justify-content-center h-75">
             <div class="card">
@@ -64,21 +85,21 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="username" class="form-control" name="username" placeholder="username" required="required">
+                            <input type="text" class="form-control" name="username" placeholder="username" required="required">
                         </div>
                         <!-- Password -->
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                            <input type="text" class="form-control" name="password" placeholder="Password" required="required">
                         </div>
                         <!-- Confirm Password -->
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-check-square"></i></span>
                             </div>
-                            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
+                            <input type="text" class="form-control" name="confirm_password" placeholder="Confirm Password"
                                 required="required">
                         </div>
                         <!-- Terms and Conditions -->
