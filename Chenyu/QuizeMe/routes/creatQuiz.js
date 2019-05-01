@@ -6,13 +6,13 @@ const checkLogin = require('../middlewares/check').checkLogin;
 const data = require("../data");
 const quizzes = data.quizzes;
 
-router.get("/", async (req, res) => {
+router.get("/", checkLogin,async (req, res) => {
     res.send('Quiz Page');
 });
 
-router.post("/", async (req, res) => {
+router.post("/",checkLogin, async (req, res) => {
     const quizzeInfo = req.body;
-    let field = RegisterInfo.field;
+    let field = quizzeInfo.field;
     let candidatesId = req.session.userId;
 
     let quizData;

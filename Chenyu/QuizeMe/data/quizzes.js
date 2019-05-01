@@ -1,6 +1,7 @@
 const mongoCollections = require("./config/mongoCollections");
 const questions = mongoCollections.questions;
 const candidates = mongoCollections.candidates;
+const creators = mongoCollections.creators;
 const quizzes = mongoCollections.quizzes;
 const Ques_func = require('./questions')
 const { ObjectId } = require('mongodb');
@@ -12,7 +13,11 @@ async function NewQuiz(id, field){
     if (!newid) throw "You must provide an id to search for";
 
     const candidatesCollection = await candidates();
-    const user = await candidatesCollection.findOne({ _id: newid });
+    const user1 = await candidatesCollection.findOne({ _id: newid });
+    const creatorsCollection = await creators();
+    const user2 = await creatorsCollection.findOne({ _id: newid });
+    const user = user1||user2;
+
     if (user === null) throw "No user with this ID.";
 
     CHK.CHKstring(field);
@@ -24,7 +29,7 @@ async function NewQuiz(id, field){
   
     let ANewQuiz = {
       _id: newId4Quiz,
-      candidate: newid,
+      user: newid,
       quizName: field+"QUIZ",
       quizScore: ""
     };
@@ -43,7 +48,11 @@ async function genQuiz(id, field){
     if (!newid) throw "You must provide an id to search for";
 
     const candidatesCollection = await candidates();
-    const user = await candidatesCollection.findOne({ _id: newid });
+    const user1 = await candidatesCollection.findOne({ _id: newid });
+    const creatorsCollection = await creators();
+    const user2 = await creatorsCollection.findOne({ _id: newid });
+    const user = user1||user2;
+
     if (user === null) throw "No user with this ID.";
 
     const questionsCollection = await questions();
@@ -78,13 +87,14 @@ async function genQuiz(id, field){
         temp_arr = outArr[i].answers.concat(outArr[i].options);
         OneQ.option = CHK.RandomN(temp_arr, temp_arr.length)
         NewOut.push(OneQ)
-        console.log(OneQ.option)
+        // console.log(OneQ.option)
     }
 
     return { Q_id: QUIZ._id,
              Questions: NewOut};
 }
-// genQuiz("5cc52150c2f402221de5e50a","memory").then(result => console.log(result));
+// genQuiz("5cc8b910b2e1ee4c3623599e"," ").then(result => console.log(result));
+// console.log(null||"asdadsf")
 
 async function getQuizById(QuizId){
     let newID = CHK.checkObjectId(QuizId);
@@ -103,11 +113,15 @@ async function getAllQuiz(id){
     if (!newid) throw "You must provide an id to search for";
 
     const candidatesCollection = await candidates();
-    const user = await candidatesCollection.findOne({ _id: newid });
+    const user1 = await candidatesCollection.findOne({ _id: newid });
+    const creatorsCollection = await creators();
+    const user2 = await creatorsCollection.findOne({ _id: newid });
+    const user = user1||user2;
+
     if (user === null) throw "No user with this ID.";
 
     const quizzesCollection = await quizzes();
-    const Allquizzes = await quizzesCollection.find({ candidate: newid }).toArray();
+    const Allquizzes = await quizzesCollection.find({ user: newid }).toArray();
 
     return Allquizzes
 }
