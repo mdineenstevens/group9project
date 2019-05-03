@@ -1,0 +1,45 @@
+.card{
+    margin-top: 150px;
+    height: 420px;
+    width: 440px;
+    background-color: white !important;
+    -webkit-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    }
+.card-header h2{
+    font: arial;
+    font-size: 22px;
+    text-align: left;
+    color: #1e3799 !important;
+    }
+.white-text{
+    font: arial;
+    color: white;
+    }
+
+.signin-text{
+    font: arial;
+    color: #1e3799;
+    font-size: 26px;
+    text-align: center;
+    }
+.signin-header{
+    font: arial;
+    color: #1e3799;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: -100px;
+    padding-top: 30px;
+    }
+.signin-header2{
+    font: arial;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: -100px;
+    padding-top: 30px;
+    }
+
+
+      
