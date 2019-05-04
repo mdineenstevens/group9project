@@ -21,13 +21,13 @@ html,body{
     background-size: cover;
     background-position: center;
     height: 100vh;
-    background: linear-gradient(
-        to right, 
-        #1e3799 0%, 
-        #1e3799 50%, 
-        #f2f2f2 50%, 
-        #f2f2f2 100%
-      );
+    background-color: #f2f2f2;
+    }
+.section2 img{
+    margin-top: -10px;
+    }
+.section5 img{
+    margin-top: -10px;
     }
 .section3 {
     background-image: url('section3.jpg');
@@ -35,6 +35,25 @@ html,body{
     background-position: center;
     height: 100vh;
     }
+.section4{
+    height: 100vh;
+    background: linear-gradient(
+    to right, 
+    #1e3799 0%, 
+    #1e3799 50%, 
+    #f2f2f2 50%, 
+    #f2f2f2  100%
+  );
+    background-size: cover;
+    background-position: center;
+}
+.section5{
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
 .overlay{
     position: absolute;
     min-height: 100%;

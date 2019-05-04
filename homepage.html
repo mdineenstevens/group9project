@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/welcome.css">
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/register.css">
 </head>
 
 <body>
@@ -35,13 +37,16 @@
                 <ul class="navbar-nav mr-4">
 
                     <li class="nav-item">
-                        <a class="nav-link" data-value="about" href="#">About Us</a>
+                        <a href="#section3" class="nav-link" data-value="about" href="#">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " data-value="services" href="#">Services</a>
+                        <a href="#section2" class="nav-link" data-value="about" href="#">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " data-value="team" href="#">Team</a>
+                        <a href="#section4" class="nav-link " data-value="services" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#section5" class="nav-link " data-value="team" href="#">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " data-value="contact" href="#">Contact</a>
@@ -52,7 +57,7 @@
         </nav>
     </header>
 
-    <section class="section1">
+    <section class="section1" name="home">
         <!-- -->
         <div class="overlay">
             <div class="container">
@@ -61,22 +66,29 @@
                     <p> QuizMe provides an easy-to-use platform for creating, sharing, and taking
                         user-created quizzes
                     </p>
-                    <button class="btn btn-outline-secondary btn-lg">Learn More</button>
+                    <a class="btn btn-primary btn-lg" href="#section3" role="button" style="background-color: #1e3799">Learn
+                        More </a>
+
+                    <a class="btn btn-primary btn-lg" href="#section2" role="button" style="background-color: #1e3799">Sign
+                        In </a>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <section class="section2">
-
-        <div class="container">
-            <div class="float-right h-75">
+    <section class="section2" id="section2">
+        <div class="container-fluid">
+            <div class="flex-center h-75">
+                <div class="text-center">
+                    <div class="circle">
+                        <img src="pictures/quizme.jpg" class="rounded mx-auto" width="60" height="60" alt="Website Logo">
+                    </div>
+                </div>
                 <div class="signin-header">
                     Welcome Back!
                 </div>
-
-                <div class="card">
+                <div class="card mx-auto">
                     <div class="card-header">
                         <div class="signin-text">
                             Sign In
@@ -113,7 +125,7 @@
                         </form>
                         <div class="d-flex justify-content-center links">
                             Don't have an account? <br>
-                            <a href="#">Sign Up</a>
+                            <a href="#section5">Sign Up</a>
                         </div>
                         <div class="d-flex justify-content-center">
                             <a href="#">Forgot your password?</a>
@@ -121,11 +133,107 @@
                     </div>
                 </div>
             </div>
-            <div class="float-left h-75">
+
+        </div>
+    </section>
+
+    <section class="section3" id="section3">
+        <div class="overlay2">
+            <div class="container">
+                <div class="about">
+                    <h1 class="text-center">About Us</h1>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <img src="pictures/section2a.jpg" class="img-fluid">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 desc">
+
+                            <h3>Our Mission: </h3>
+                            <p>
+                                Unlike other quiz-taking platforms, QuizMe is driven by simplicity and convenience.
+                                We have streamlined the quiz-taking process to give users the tools they need to
+                                generate, save, and share quizzes with others. To take this convenience one step
+                                further, we save all of your previously-generated questions so they can be re-used or
+                                shared in the future.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section4" id="section4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <h1>Take Quizzes:</h1>
+                        <div class="circle1">
+                            <img src="pictures/quiztaker1.jpg" class="rounded mx-auto" width="60" height="80" alt="Website Logo">
+                        </div>
+                        <p>Immediately review your answers upon completion</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center">
+                        <h1 class="blue">Create Quizzes:</h1>
+                        <div class="circle2">
+                            <img src="pictures/creator1.jpg" class="rounded mx-auto" width="50" height="75" alt="Website Logo">
+                        </div>
+                        <p class="blue">Quickly create and add multiple choice questions to your quiz</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <div class="circle1">
+                            <img src="pictures/quiztaker2.jpg" class="rounded mx-auto" width="60" height="80" alt="Website Logo">
+                        </div>
+                        <p>Choose from a wide variety of subjects</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center">
+                        <div class="circle2">
+                            <img src="pictures/creator2.jpg" class="rounded mx-auto pic4" width="60" height="50" alt="Website Logo">
+                        </div>
+                        <p class="blue">Share your quiz questions with other creators</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <div class="circle1">
+                            <img src="pictures/quiztaker3.jpg" class="pic3 rounded mx-auto" width="90" height="75" alt="Website Logo">
+                        </div>
+                        <p>Keep track of your scores for all completed quizzes</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center">
+                        <div class="circle2">
+                            <img src="pictures/creator3.jpg" class="rounded mx-auto pic4" width="60" height="60" alt="Website Logo">
+                        </div>
+                        <p class="blue">Save individual questions and use them on future quizzes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section5" id="section5">
+        <div class="container-fluid">
+            <div class="float-center h-75">
+                <div class="text-center">
+                    <div class="circle">
+                        <img src="pictures/quizme.jpg" class="rounded mx-auto" width="60" height="60" alt="Website Logo">
+                    </div>
+                </div>
                 <div class="signin-header2">
                     Join QuizMe!
                 </div>
-                <div class="card">
+                <div class="card mx-auto">
                     <!-- Card Header -->
                     <div class="card-header">
                         <div class="signin-text">
@@ -182,36 +290,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="section3">
-        <div class="overlay2">
-            <div class="container">
-                <div class="about">
-                    <h1 class="text-center">About Us</h1>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <img src="pictures/section2a.jpg" class="img-fluid">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-12 desc">
-
-                            <h3>Our Mission: </h3>
-                            <p>
-                                ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section4">
-        <!-- contact -->
     </section>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
