@@ -1,0 +1,14 @@
+footer .list-inline-item{
+    color: #1e3799;
+    height: 10px;
+}
+footer h5{
+    font: arial;
+    color: #1e3799;
+}
+
+footer p{
+    font: arial;
+    color: #1e3799;
+    font-size: 22px;
+}
