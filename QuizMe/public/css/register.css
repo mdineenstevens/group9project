@@ -1,0 +1,60 @@
+.section5 .card{
+    margin-top: 110px;
+    height: 420px;
+    width: 440px;
+    background-color: white !important;
+    -webkit-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    }
+.section5 .card-header h2{
+    font: arial;
+    font-size: 22px;
+    text-align: left;
+    color: #1e3799 !important;
+    }
+.section5 .white-text{
+    font: arial;
+    color: white;
+    }
+
+.section5 .signin-text{
+    font: arial;
+    color: #1e3799;
+    font-size: 26px;
+    text-align: center;
+    }
+.section5 .signin-header{
+    font: arial;
+    color: #1e3799;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: -100px;
+    padding-top: 10px;
+    }
+.section5 .signin-header2{
+    font: arial;
+    color: #1e3799;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: -100px;
+    padding-top: 10px;
+    }
+
+.section5 .circle { 
+    width: 100px;
+    height: 100px;
+    background: #1e3799; 
+    -moz-border-radius: 60px; 
+    -webkit-border-radius: 60px; 
+    border-radius: 60px;
+    padding-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+    }
+.section5 .text-center{
+    padding-top: 80px;
+}
