@@ -7,7 +7,10 @@ const creators = data.creators;
 
 router.get("/", async (req, res) => {
     // console.log('Register Page');
-    res.render('mainpage/homepage');
+    res.render('mainpage/homepage',{
+        title: "home page",
+        HOMEPAGE_CSS: true
+    });
 });
 
 router.post("/register", async (req, res) => {
