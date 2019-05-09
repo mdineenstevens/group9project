@@ -20,8 +20,9 @@ $(document).ready(function () {
             }
         }
 
-    })
-     $("#login-btn").click(async function () {
+    });
+
+    $("#login-btn").click(async function () {
         let data = $("#login-form").serialize()
         try {
             let result = await axios.post('/login', data)
@@ -41,6 +42,5 @@ $(document).ready(function () {
                 $('#error-box-login').text(e.message)
             }
         }
-
-    })
+    });
 })

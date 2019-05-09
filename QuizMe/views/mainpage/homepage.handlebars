@@ -76,7 +76,8 @@
                     <form id="login-form">
                         <!-- User-Type -->
                         <div class="input-group form-group">
-                            <select class="form-control" id="user-identity" name="userID">
+                            {{!-- <select class="form-control" id="user-identity" name="userID"> --}}
+                            <select class="form-control" name="userID">
                                 <option>Please Select a User Type:</option>
                                 <option value="creator">Creator</option>
                                 <option value="candidate">Candidate</option>
@@ -234,7 +235,8 @@
                     <form id="register-form">
                         <!-- User-Type -->
                         <div class="input-group form-group">
-                            <select class="form-control" id="user-identity" name="userID">
+                            {{!-- <select class="form-control" id="user-identity" name="userID"> --}}
+                            <select class="form-control" name="userID">
                                 <option>Please Select a User Type:</option>
                                 <option value="creator">Creator</option>
                                 <option value="candidate">Candidate</option>
@@ -321,6 +323,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{{!-- <script src="../../public/js/script.js"></script> --}}
 <script>
     $(document).ready(function () {
         $("#register-btn").click(async function () {
