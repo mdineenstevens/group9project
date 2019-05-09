@@ -6,7 +6,8 @@ router.get("/", async (req, res) => {
         req.session.user = null;
         req.session.identity = null;
         req.session.userId = null;
-        res.json(req.session);
+        // res.json(req.session);
+        res.redirect("/QuizMe");
 });
 
 

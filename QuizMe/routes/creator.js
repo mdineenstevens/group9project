@@ -11,13 +11,19 @@ router.get("/", async (req, res) => {
     res.json()
 });
 
-
-
 ////////////////////////////////relating to the creator to create a Question////////////////////////////
 router.get("/createQuestion", async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/createQues',{
         title: "CreateQuestion",
+        Creator_path_CSS: true
+    });
+});
+
+router.get("/takeQuiz", async (req, res) => {
+    // res.send('Questions create Page');
+    res.render('Quiz/takeQuiz',{
+        title: "Quiz Start",
         Creator_path_CSS: true
     });
 });

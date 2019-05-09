@@ -1,4 +1,4 @@
-// const logoutRoutes = require("./logout");
+
 // const accountUpdateRoutes = require("./accountUpdate");
 // const createQuestionsRoutes = require("./createQuestions");
 // const viewQuestionsRoutes = require("./viewQuestions");
@@ -10,8 +10,10 @@
 const HomeRoutes = require("./homepage");
 const CreatorRoutes = require("./creator");
 
+const logoutRoutes = require("./logout");
+
 const constructorMethod = app => {
-  // app.use("/logout", logoutRoutes);
+  
   // app.use("/accountUpdate", accountUpdateRoutes);
   // app.use("/createQuestions", createQuestionsRoutes);
   // app.use("/viewQuestions", viewQuestionsRoutes);
@@ -23,6 +25,8 @@ const constructorMethod = app => {
 
   app.use("/QuizMe", HomeRoutes)
   app.use("/QuizMeCreator", CreatorRoutes)
+
+  app.use("/logout", logoutRoutes);
 
   app.use("*", (req, res) => {
     // res.redirect('/QuizMe');
