@@ -6,12 +6,12 @@ const candidates = data.candidates;
 const creators = data.creators;
 
 router.get("/", async (req, res) => {
-    console.log('Register Page');
+    // console.log('Register Page');
     res.render('mainpage/homepage');
 });
 
-router.post("/", async (req, res) => {
-    //get the register infomation(name,password,identity) frome request
+router.post("/register", async (req, res) => {
+    // console.log('Register Page');
     console.log("register POST SUCCESS")
     console.log(req.body)
 
@@ -55,11 +55,58 @@ router.post("/", async (req, res) => {
               throw 'identity data error';
           }
         //   res.redirect("/login")
-          res.redirect("/register")
+        //   res.redirect("/register")
+        res.send({ success: true })
     }catch(e){
         res.status(500).json({ error: e });
     }
 });
 
+router.post("/login", async (req, res) => {
+    // console.log('Register Page');
+     //get the register infomation(name,password,identity) frome request
+    const loginInfo = req.body;
+    const name = loginInfo.username;
+    const password = loginInfo.password;
+    const identity = loginInfo.userID;
+    let userdata;
+
+    //check the register infomation  
+    if(!loginInfo){
+        res.status(400).json({ error: "You must provide Effective Input" }).end();
+        return;
+    }
+    if(!name){
+        res.status(400).json({ error: "You must provide a Name" }).end();
+        return;
+    }
+    if(!password){
+        res.status(400).json({ error: "You must provide a Password" }).end();
+        return;
+    }
+    if(!identity){
+        res.status(400).json({ error: "You must provide a Identity" }).end();
+        return;
+    }
+
+    try{
+        if(identity == 'candidate')
+        {
+            userdata = await candidates.login(name,password);
+        }else if(identity == 'creator'){
+            userdata = await creators.login(name,password);
+        }else{
+            throw 'identity data error';
+        }
+    req.session.user = userdata.name;
+    req.session.identity = identity;
+    req.session.userId = userdata._id;
+    console.log(req.session);
+    res.json(req.session);
+
+    }catch(e){
+        res.status(500).json({ error: e });
+    }
+});
 
 module.exports = router;

@@ -16,16 +16,16 @@
                     <a href="#home" class="nav-link" data-value="about">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#section3" class="nav-link" data-value="about">About Us</a>
+                    <a href="#AboutUs" class="nav-link" data-value="about">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#section4" class="nav-link " data-value="services">Services</a>
+                    <a href="#services" class="nav-link " data-value="services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#section2" class="nav-link" data-value="about">Sign In</a>
+                    <a href="#login" class="nav-link" data-value="about">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#section5" class="nav-link " data-value="team">Register</a>
+                    <a href="#register" class="nav-link " data-value="team">Register</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link " data-value="contact">Contact</a>
@@ -44,10 +44,10 @@
                 <p> QuizMe provides an easy-to-use platform for creating, sharing, and taking
                     user-created quizzes
                 </p>
-                <a class="btn btn-primary btn-lg" href="#section3" role="button" style="background-color: #1e3799">Learn
+                <a class="btn btn-primary btn-lg" href="#AboutUs" role="button" style="background-color: #1e3799">Learn
                     More </a>
 
-                <a class="btn btn-primary btn-lg" href="#section2" role="button" style="background-color: #1e3799">Sign
+                <a class="btn btn-primary btn-lg" href="#login" role="button" style="background-color: #1e3799">Sign
                     In </a>
             </div>
         </div>
@@ -55,7 +55,7 @@
 </section>
 
 
-<section class="section2" id="section2">
+<section class="section2" id="login">
     <div class="container-fluid">
         <div class="flex-center h-75">
             <div class="text-center">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/login" method="POST">
+                    <form id="login-form">
                         <!-- User-Type -->
                         <div class="input-group form-group">
                             <select class="form-control" id="user-identity" name="userID">
@@ -101,8 +101,11 @@
                             <label class="checkbox-inline"><input type="checkbox" required="required"> Remember
                                 Me</label>
                         </div>
+                        <div id="error-box-login" class="form-group">
+                            
+                        </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-lg" style="background-color: #1e3799">
+                            <button type="button" id="login-btn" class="btn btn-block btn-lg" style="background-color: #1e3799">
                                 <div class="white-text">
                                     Sign In
                                 </div>
@@ -123,7 +126,7 @@
     </div>
 </section>
 
-<section class="section3" id="section3">
+<section class="section3" id="AboutUs">
     <div class="overlay2">
         <div class="container">
             <div class="about">
@@ -148,7 +151,7 @@
         </div>
     </div>
 </section>
-<section class="section4" id="section4">
+<section class="section4" id="services">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -208,7 +211,7 @@
         </div>
     </div>
 </section>
-<section class="section5" id="section5">
+<section class="section5" id="register">
     <div class="container-fluid">
         <div class="float-center h-75">
             <div class="text-center">
@@ -228,7 +231,7 @@
                 </div>
                 <div class="card-body">
                     <!-- Beginning of Form -->
-                    <form action="/register" method="post">
+                    <form id="register-form">
                         <!-- User-Type -->
                         <div class="input-group form-group">
                             <select class="form-control" id="user-identity" name="userID">
@@ -264,9 +267,18 @@
                             <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
                                 <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
                         </div>
+
+                        <!-- error -->
+                        <div id="error-box-reg" class="form-group">
+                            {{!-- {{#if HasRegErr}}
+                                <p> {{RegErr}} </p>
+                            {{/if}} --}}
+                        </div>
+
+
                         <!-- Register Button -->
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-lg" style="background-color: #1e3799">
+                            <button type="button" id="register-btn" class="btn btn-block btn-lg" style="background-color: #1e3799">
                                 <div class="white-text">
                                     Register</div>
                             </button>
@@ -308,3 +320,52 @@
     crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#register-btn").click(async function () {
+            let data = $("#register-form").serialize()
+            try {
+                let result = await axios.post('/QuizMe/register', data)
+                console.log(result)
+                let response = result.data
+                if (response.success === true) {
+                    location.href = "/QuizMe"
+                    return
+                }
+                throw new Error(response)
+            }
+            catch (e) {
+                if (e.response) {
+                    $('#error-box-reg').text(e.response.data.error)
+                }
+                else {
+                    $('#error-box-reg').text(e.message)
+                }
+            }
+
+        })
+         $("#login-btn").click(async function () {
+            let data = $("#login-form").serialize()
+            try {
+                let result = await axios.post('/QuizMe/login', data)
+                console.log(result)
+                let response = result.data
+                if (response.success === true) {
+                    location.href = "/QuizMe"
+                    return
+                }
+                throw new Error(response)
+            }
+            catch (e) {
+                if (e.response) {
+                    $('#error-box-login').text(e.response.data.error)
+                }
+                else {
+                    $('#error-box-login').text(e.message)
+                }
+            }
+
+        })
+    })
+</script>

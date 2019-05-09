@@ -31,4 +31,10 @@ module.exports = {
         }
         next();
      },
+
+     Logging: function Logging(req, res, next){
+         console.log(`[${new Date().toUTCString()}]:${req.method} ${req.originalUrl}`);
+     
+         next();
+      }
 }

@@ -6,6 +6,7 @@ const session = require("express-session");
 const configRoutes = require("./routes");
 const exphbs = require("express-handlebars");
 const app = express();
+const middleware = require("./middlewares/check");
 
 
 //Use static file directory
@@ -24,6 +25,9 @@ app.use(session({
 //Use bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
+
+app.use(middleware.Logging);
 
 //set handlebar
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
