@@ -9,7 +9,11 @@ const quizzes = data.quizzes;
 
 router.get("/", async (req, res) => {
     // res.send('Questions create Page');
-    res.json()
+    // res.json()
+    res.render('mainpage/mainCreator',{
+        title: "Creator Main Page",
+        Creator_main_CSS: true
+    });
 });
 
 ////////////////////////////////relating to the creator to create a Question////////////////////////////
