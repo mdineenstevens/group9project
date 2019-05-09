@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 router.post("/register", async (req, res) => {
     // console.log('Register Page');
     console.log("register POST SUCCESS")
-    console.log(req.body)
+    // console.log(req.body)
 
     const RegisterInfo = req.body;
     const name = RegisterInfo.username;
@@ -104,7 +104,7 @@ router.post("/login", async (req, res) => {
     req.session.user = userdata.name;
     req.session.identity = identity;
     req.session.userId = userdata._id;
-    console.log(req.session);
+    // console.log(req.session);
     // res.json(req.session);
     res.send({ success: true })
 

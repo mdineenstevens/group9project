@@ -51,11 +51,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form id="CreateQues-form">
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Question:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Your Question">
+                                <input type="text" name="Ques_content" class="form-control" placeholder="Your Question">
                             </div>
                         </div>
                         <p class="text-center">(Please indicate the correct answer(s) below by selecting the
@@ -64,61 +64,71 @@
                         <div class="form-row buffer">
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" name="op1" value="1" id="defaultCheck1">
                                     <label class="form-check-label" for="defaultCheck1">
                                         Answer:
                                     </label>
                                 </div>
                             </div>
                             <div class="col-10">
-                                <input type="text" class="form-control" placeholder="Option 1">
+                                <input type="text" class="form-control" name="option1" placeholder="Option 1">
                             </div>
                         </div>
                         <!-- QUESTION 2 -->
                         <div class="form-row buffer">
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                    <input class="form-check-input" type="checkbox" name="op2" value="1" id="defaultCheck2">
                                     <label class="form-check-label" for="defaultCheck2">
                                         Answer:
                                     </label>
                                 </div>
                             </div>
                             <div class="col-10">
-                                <input type="text" class="form-control" placeholder="Option 2">
+                                <input type="text" class="form-control" name="option2" placeholder="Option 2">
                             </div>
                         </div>
                         <!-- QUESTION 3 -->
                         <div class="form-row buffer">
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                    <input class="form-check-input" type="checkbox" name="op3" value="1" id="defaultCheck3">
                                     <label class="form-check-label" for="defaultCheck3">
                                         Answer:
                                     </label>
                                 </div>
                             </div>
                             <div class="col-10">
-                                <input type="text" class="form-control" placeholder="Option 3">
+                                <input type="text" class="form-control" name="option3" placeholder="Option 3">
                             </div>
                         </div>
                         <!-- QUESTION 4 -->
                         <div class="form-row buffer">
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                    <input class="form-check-input" type="checkbox" name="op4" value="1" id="defaultCheck4">
                                     <label class="form-check-label" for="defaultCheck4">
                                         Answer:
                                     </label>
                                 </div>
                             </div>
                             <div class="col-10">
-                                <input type="text" class="form-control" placeholder="Option 4">
+                                <input type="text" class="form-control" name="option4" placeholder="Option 4">
                             </div>
                         </div>
+
+                        <!-- error -->
+                        <div id="error-box-crt" class="form-group">
+                            {{!-- {{#if HasRegErr}}
+                                <p> {{RegErr}} </p>
+                            {{/if}} --}}
+                        </div>
+
+
+
                         <div class="form-group">
                             <div class="text-center buffer2">
-                                <button type="submit" class="btn btn-block btn-lg" style="background-color: #1e3799">
+                                <button type="button" id="CreateQues-btn" class="btn btn-block btn-lg" style="background-color: #1e3799">
                                     <div class="white-text">
                                         Submit
                                     </div>
@@ -147,3 +157,40 @@
         </div> --}}
     </div>
 </section>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{{!-- <script src="../../public/js/script.js"></script> --}}
+<script>
+    $(document).ready(function () {
+        $("#CreateQues-btn").click(async function () {
+            let data = $("#CreateQues-form").serialize()
+            try {
+                let result = await axios.post('/QuizMeCreator/createQuestion', data)
+                console.log("Here is:",result)
+                let response = result.data
+                if (response.success === true) {
+                    location.href = "/QuizMeCreator/createQuestion"
+                    return
+                }
+                throw new Error(response)
+            }
+            catch (e) {
+                if (e.response) {
+                    $('#error-box-crt').text(e.response.data.error)
+                }
+                else {
+                    $('#error-box-crt').text(e.message)
+                }
+            }
+
+        })
+
+    })
+</script>

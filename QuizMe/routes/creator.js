@@ -5,6 +5,14 @@ const router = express.Router();
 
 const data = require("../data");
 const questions= data.questions;
+
+router.get("/", async (req, res) => {
+    // res.send('Questions create Page');
+    res.json()
+});
+
+
+
 ////////////////////////////////relating to the creator to create a Question////////////////////////////
 router.get("/createQuestion", async (req, res) => {
     // res.send('Questions create Page');
@@ -14,13 +22,30 @@ router.get("/createQuestion", async (req, res) => {
     });
 });
 
+
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request
+    console.log(req.body)
     const questionInfo = req.body;
-    let creatorId = req.session.userId;
-    let content = questionInfo.content;
-    let answers = questionInfo.answers;
-    let options = questionInfo.options;
+    // let creatorId = req.session.userId;
+    let creatorId = "5cd338ddfc94e897e7beeba2";
+    let content = questionInfo.Ques_content;
+    let answers = [];
+    let options = [];
+    let op_arr = [questionInfo.op1, questionInfo.op2, questionInfo.op3, questionInfo.op4];
+    let option_arr = [questionInfo.option1, questionInfo.option1, questionInfo.option1, questionInfo.option1];
+
+    for(let i=0; i < op_arr.length; i = i+1){
+        if(op_arr[i] === '1'){
+            answers.push(option_arr[i])
+        }else{
+            options.push(option_arr[i])
+        }
+    }
+    console.log(answers, options)
+
+    // let answers = questionInfo.answers;
+    // let options = questionInfo.options;
     let questionData;
 
     if(!content){
@@ -49,7 +74,8 @@ router.post("/createQuestion", async (req, res) => {
 
     try{
         questionData = await questions.createQuestion(creatorId,content,answers,options);
-        res.json(questionData);
+        // res.json(questionData);
+        res.send({ success: true })
     }catch(e){
       res.status(500).json({ error: e });
   }
