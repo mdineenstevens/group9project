@@ -23,8 +23,6 @@ html,body{
     top: 0;
     background: rgba(244, 244, 244, 0.79);
     }
-    
-
 .circle { 
     width: 100px;
     height: 100px;
@@ -60,8 +58,8 @@ html,body{
     }
 .row{
     padding-top: 50px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 .row1{
     padding-top: 100px;
