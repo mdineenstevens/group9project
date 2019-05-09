@@ -9,6 +9,7 @@
 
 const HomeRoutes = require("./homepage");
 const CreatorRoutes = require("./creator");
+const CandidateRoutes = require("./candidate");
 
 const logoutRoutes = require("./logout");
 
@@ -25,6 +26,7 @@ const constructorMethod = app => {
 
   app.use("/QuizMe", HomeRoutes)
   app.use("/QuizMeCreator", CreatorRoutes)
+  app.use("/QuizMeCandidate", CandidateRoutes)
 
   app.use("/logout", logoutRoutes);
 
