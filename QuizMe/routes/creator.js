@@ -71,15 +71,22 @@ router.get("/QuizScore", async (req, res) => {
     });
 });
 
-// router.get("/QuizHistory", async (req, res) => {
-//     // res.send('Questions create Page');
-//     req.session.quizData
-//     res.render('Quiz/QuizResult',{
-//         Name: req.session.quizData.quizName,
-//         Score: req.session.quizData.quizScore,
-//         Show_score: true
-//     });
-// });
+router.get("/QuizHistory", async (req, res) => {
+    // res.send('Questions create Page');
+    let candidatesId = "5cd338ddfc94e897e7beeba2";
+    let quizzesData;
+
+    try{
+        quizzesData = await quizzes.getAllQuiz(candidatesId);
+        res.render("Quiz/QuizHistory",{
+            history: quizzesData,
+            Show_score: true
+        });
+
+    }catch(e){
+      res.status(500).json({ error: e });
+    }
+});
 
 
 router.post("/createQuestion", async (req, res) => {

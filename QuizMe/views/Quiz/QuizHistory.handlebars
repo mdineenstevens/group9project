@@ -1,0 +1,107 @@
+<header class="header">
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1e3799">
+    <a class="navbar-brand" href="#">
+        <img src="../pictures/quizme.jpg" width="30" height="30" class="d-inline-block align-top" alt="Website Logo">
+        QuizMe!
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-4">
+            <li class="nav-item">
+                <a href="http://localhost:3000/QuizMeCreator/" class="nav-link" data-value="about">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="http://localhost:3000/QuizMeCreator/createQuestion" class="nav-link" data-value="about">Create Qestion</a>
+            </li>
+            <li class="nav-item">
+                <a href="http://localhost:3000/QuizMeCreator/searchQuestion" class="nav-link " data-value="services">Search Question</a>
+            </li>
+            <li class="nav-item">
+                <a href="#section2" class="nav-link" data-value="about">Try Quiz</a>
+            </li>
+            {{!-- <li class="nav-item">
+                <a href="#section5" class="nav-link " data-value="team"></a>
+            </li> --}}
+            <li class="nav-item">
+                <a href="http://localhost:3000/logout" class="nav-link " data-value="contact">Logout</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+</header>
+<section class="section-take">
+    <div class="container-fluid">
+        <div class="flex-center h-75">
+            <div class="signin-header">
+                Quiz Results
+            </div>
+        </div>
+        <div class="card mx-auto h-100">
+            <div class="card-body">
+                <ul class="a">
+                    {{#if history.length}} {{!history being the array of quiz results}}
+                        {{#each history}}
+                            <li>
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="QuizTitle" class="col-sm-2 col-form-label font buffer-his">Title:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control-plaintext result-font buffer-his"
+                                                id="QuizTitle" value={{quizName}}> {{!quizTitle being title of a taken quiz}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="QuizScore" class="col-sm-2 col-form-label font">Score:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control-plaintext result-font" id="QuizScore"
+                                                value={{quizScore}}> {{!quizScore being the score of a taken quiz}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        {{/each}}
+                    {{else}}
+                        <li>You haven't taken any quizzes</li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+    <footer class="page-footer font-small pt-4" id="contact">
+
+        <!-- Footer Elements -->
+        <div class="container">
+            <div class="text-center">
+                <p> Contact us at: <a href="mailto:webmaster@example.com">QuizMe@gmail.com</a></p>
+            </div>
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <a class="btn btn-primary btn-lg" href="#home" role="button" style="background-color: #1e3799">Home</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
+
+        </div>
+        <!-- Footer Elements -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#"> QuizMe.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>

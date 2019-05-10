@@ -48,6 +48,22 @@ router.get("/QuizScore", async (req, res) => {
     });
 });
 
+router.get("/QuizHistory", async (req, res) => {
+    // res.send('Questions create Page');
+    let candidatesId = "5cd338ddfc94e897e7beeba2";
+    let quizzesData;
+
+    try{
+        quizzesData = await quizzes.getAllQuiz(candidatesId);
+        res.render("Quiz/QuizHistory",{
+            history: quizzesData,
+            Show_score: true
+        });
+
+    }catch(e){
+      res.status(500).json({ error: e });
+    }
+});
 // router.post("/takeQuiz/submit",checkLogin, async (req, res) => {
 //     const answerInfo = req.body;
 //     let quizId = answerInfo.quizId;
