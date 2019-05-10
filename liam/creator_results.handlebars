@@ -43,18 +43,18 @@
             </div>
         </div>
         <div class="card mx-auto h-100">
-            {{#if result.length}}
+            {{#if result.length}} {{!result being the array of questions searched for}}
                 {{#each result}}
                     <div class="card-body">
                         <form>
                             <div class="form-group row">
                                 <div class="col">
-                                    <div>{{creator}}</div>
-                                    <div>{{content}}</div>
-                                    <div>Answers: {{answers}}</div>
+                                    <div>{{creator}}</div> {{!name of the question creator}}
+                                    <div>{{content}}</div> {{!The prompt for the question}}
+                                    <div>Answers: {{answers}}</div> {{!answer to the question}}
                                     <div>Options</div>
                                     <ul>
-                                        {{#each options}}
+                                        {{#each options}} {{!options are the answer choices that a candidate can choose from}}
                                             <li>{{this}}</li>
                                         {{/each}}
                                     </ul>
@@ -67,7 +67,7 @@
                         </form>
                     </div>
                 {{/each}}
-            {{else}}
+            {{else}} {{!if there are no results}}
                 <div class="card-body">
                     There are no results
                 </div>
