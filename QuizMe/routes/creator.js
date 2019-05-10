@@ -41,6 +41,14 @@ router.get("/searchQuestion", async (req, res) => {
     });
 });
 
+router.get("/startQuiz", async (req, res) => {
+    // res.send('Questions create Page');
+    res.render('Question/tryQuiz',{
+        title: "StartQuiz",
+        Creator_search_CSS: true
+    });
+});
+
 
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request

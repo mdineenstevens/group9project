@@ -16,11 +16,14 @@ router.get("/", async (req, res) => {
     });
 });
 
+
+
 router.post("/takeQuiz", async (req, res) => {
-    // const quizzeInfo = req.body;
-    // let field = quizzeInfo.field;
-    const quizzeInfo = {field: "memory"};
-    let field = "memory";
+    const quizzeInfo = req.body;
+    let field = quizzeInfo.field;
+    // console.log(quizzeInfo)
+    // const quizzeInfo = {field: "memory"};
+    // let field = "memory";
     // let candidatesId = req.session.userId;
     let candidatesId = "5cd338ddfc94e897e7beeba2";
 
@@ -41,7 +44,9 @@ router.post("/takeQuiz", async (req, res) => {
         quizData = await quizzes.genQuiz(candidatesId,field);
         console.log(quizData.Questions[0]);
         res.render("Quiz/takeQuiz", {
-            Questions: quizData.Questions
+            Questions: quizData.Questions,
+            title: "startQuiz",
+            Creator_path_CSS: true
         });
 
     }catch(e){
