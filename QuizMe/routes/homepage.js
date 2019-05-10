@@ -113,4 +113,61 @@ router.post("/login", async (req, res) => {
     }
 });
 
+
+router.post("/accountUpdate",async (req, res) => {
+    //get the Update infomation(name,OldPassword,NewPassword,identity) frome request
+    const longinInfo = req.body;
+    console.log(longinInfo)
+    // const name = longinInfo.username;
+
+
+    const OldPassword = longinInfo.OldPassword;
+    const NewPassword = longinInfo.NewPassword;
+    const identity = "creators";
+    // const identity = longinInfo.identity;
+    let userId = "5cd43a344e4c66b0434c4970";
+    let userdata;
+    
+    //check the  infomation  
+    if(!longinInfo){
+      res.status(400).json({ error: "You must provide Effective Input" }).end();
+      return;
+    }
+    // if(!name){
+    //   res.status(400).json({ error: "You must provide a name" }).end();
+    //   return;
+    // }
+    if(!OldPassword){
+      res.status(400).json({ error: "You must provide OldPassword" }).end();
+      return;
+    }
+    if(!NewPassword){
+      res.status(400).json({ error: "You must provide NewPassword" }).end();
+      return;
+    }
+    // if(!identity){
+    //   res.status(400).json({ error: "You must provide a Identity" }).end();
+    //   return;
+    // }
+    
+    try{
+      if(identity == 'candidates')
+      {
+          userdata = await candidates.infoUpdate(userId,OldPassword,NewPassword);
+          res.send({ success: true })
+        //   res.json(userdata);
+      }else if(identity == 'creators'){
+          userdata = await creators.infoUpdate(userId,OldPassword,NewPassword);
+          res.send({ success: true })
+        //   res.json(userdata);
+      }else{
+          throw 'identity data error';
+      } 
+    }catch(e){
+        res.status(500).json({ error: e });
+    }
+  
+    res.send('Account Updata Page');
+});
+
 module.exports = router;

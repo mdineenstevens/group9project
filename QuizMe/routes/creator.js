@@ -49,6 +49,15 @@ router.get("/startQuiz", async (req, res) => {
     });
 });
 
+router.get("/accountUpdate", async (req, res) => {
+    // res.send('Questions create Page');
+    res.render('mainpage/accountupdate',{
+        title: "Account Update",
+        HOMEPAGE_AU_CSS: true,
+        identity: "Creator"
+    });
+});
+
 
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request
@@ -160,6 +169,56 @@ router.post("/takeQuiz", async (req, res) => {
 //     }
 
 // });
+
+router.post("/accountUpdate", async (req, res) => {
+    //get the Update infomation(name,OldPassword,NewPassword,identity) frome request
+    const longinInfo = req.body;
+    const name = longinInfo.name;
+    const OldPassword = longinInfo.OldPassword;
+    const NewPassword = longinInfo.NewPassword;
+
+    let userdata;
+    
+     //check the  infomation  
+    if(!longinInfo){
+      res.status(400).json({ error: "You must provide Effective Input" }).end();
+      return;
+    }
+    if(!name){
+      res.status(400).json({ error: "You must provide a name" }).end();
+      return;
+    }
+    if(!OldPassword){
+      res.status(400).json({ error: "You must provide OldPassword" }).end();
+      return;
+    }
+    if(!NewPassword){
+      res.status(400).json({ error: "You must provide NewPassword" }).end();
+      return;
+    }
+    if(!identity){
+      res.status(400).json({ error: "You must provide a Identity" }).end();
+      return;
+    }
+    
+    try{
+      if(identity == 'candidates')
+      {
+          userdata = await candidates.infoUpdate(req.session.userId,OldPassword,NewPassword);
+          res.json(userdata);
+      }else if(identity == 'creators'){
+          userdata = await creators.infoUpdate(req.session.userId,OldPassword,NewPassword);
+          res.json(userdata);
+      }else{
+          throw 'identity data error';
+      } 
+    }catch(e){
+        res.status(500).json({ error: e });
+    }
+  
+    res.send('Account Updata Page');
+  });
+
 
 
 

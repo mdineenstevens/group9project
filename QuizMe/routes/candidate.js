@@ -16,6 +16,15 @@ router.get("/", async (req, res) => {
     });
 });
 
+router.get("/accountUpdate", async (req, res) => {
+    // res.send('Questions create Page');
+    res.render('mainpage/accountupdate',{
+        title: "Account Update",
+        HOMEPAGE_AU_CSS: true,
+        identity: "Candidate"
+    });
+});
+
 
 
 router.post("/takeQuiz", async (req, res) => {
