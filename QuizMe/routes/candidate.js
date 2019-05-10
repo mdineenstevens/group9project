@@ -37,6 +37,17 @@ router.get("/startQuiz", async (req, res) => {
     });
 });
 
+router.get("/QuizScore", async (req, res) => {
+    // res.send('Questions create Page');
+    req.session.quizData
+    console.log(req.session.quizData)
+    res.render('Quiz/QuizResult',{
+        Name: req.session.quizData.quizName,
+        Score: req.session.quizData.quizScore,
+        Show_score: true
+    });
+});
+
 // router.post("/takeQuiz/submit",checkLogin, async (req, res) => {
 //     const answerInfo = req.body;
 //     let quizId = answerInfo.quizId;

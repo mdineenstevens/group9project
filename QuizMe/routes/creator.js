@@ -43,8 +43,8 @@ router.get("/searchQuestion", async (req, res) => {
 
 router.get("/startQuiz", async (req, res) => {
     // res.send('Questions create Page');
-    let e = req.session.error;
-    req.session.error = undefined;
+    let e = req.session.errors;
+    req.session.errors = undefined;
     res.render('Question/tryQuiz',{
         title: "StartQuiz",
         Creator_search_CSS: true,
@@ -60,6 +60,26 @@ router.get("/accountUpdate", async (req, res) => {
         identity: "Creator"
     });
 });
+
+router.get("/QuizScore", async (req, res) => {
+    // res.send('Questions create Page');
+    req.session.quizData
+    res.render('Quiz/QuizResult',{
+        Name: req.session.quizData.quizName,
+        Score: req.session.quizData.quizScore,
+        Show_score: true
+    });
+});
+
+// router.get("/QuizHistory", async (req, res) => {
+//     // res.send('Questions create Page');
+//     req.session.quizData
+//     res.render('Quiz/QuizResult',{
+//         Name: req.session.quizData.quizName,
+//         Score: req.session.quizData.quizScore,
+//         Show_score: true
+//     });
+// });
 
 
 router.post("/createQuestion", async (req, res) => {

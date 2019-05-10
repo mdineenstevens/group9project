@@ -199,6 +199,13 @@ router.post("/takeQuiz", async (req, res) => {
         console.log(candidatesId, field)
         quizData = await quizzes.genQuiz(candidatesId,field);
         console.log(quizData.Questions[0]);
+        let Ques_id = [];
+        for(let i=0;i<quizData.Questions.length;i=i+1){
+            Ques_id.push(quizData.Questions[i]._id)
+        }
+        console.log(Ques_id)
+        req.session.Q_id = quizData.Q_id;
+        req.session.Ques_id = Ques_id;
         res.render("Quiz/takeQuiz", {
             Questions: quizData.Questions,
             Creator_path_CSS: true
@@ -215,6 +222,45 @@ router.post("/takeQuiz", async (req, res) => {
             res.redirect('/QuizMeCreator/startQuiz')
         }
         // res.status(500).json({ error: e });
+    }
+    
+    
+});
+
+router.post("/QuizSubmit", async (req, res) => {
+
+    const answerInfo = req.body;
+    console.log(answerInfo)
+    const identity = "candidate";
+    let quizId = req.session.Q_id;
+    let Sub_ANS = answerInfo.Submission;
+    req.session.Ques_id
+    let Submission = [];
+    for(let i=0;i< req.session.Ques_id.length;i=i+1){
+        let temp = {
+            QuesId:req.session.Ques_id[i],
+            answer:[Sub_ANS[i]]
+        }
+        Submission.push(temp)
+    }
+
+    console.log(Submission)
+    let quizData;
+
+    try{
+        quizData = await quizzes.grade(quizId,Submission);
+        // console.log(quizData)
+        req.session.quizData = quizData;
+        console.log(req.session.quizData)
+
+        if(identity === 'candidate'){
+            res.redirect('/QuizMeCandidate/QuizScore');
+        }else if(identity === 'creator'){
+            res.redirect('/QuizCreator/QuizScore');
+        }
+        // res.json(quizData);
+    }catch(e){
+      res.status(500).json({ error: e });
     }
     
     
