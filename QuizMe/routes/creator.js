@@ -33,6 +33,14 @@ router.get("/takeQuiz", async (req, res) => {
     });
 });
 
+router.get("/searchQuestion", async (req, res) => {
+    // res.send('Questions create Page');
+    res.render('Question/searchQues',{
+        title: "SearchQuestion",
+        Creator_search_CSS: true
+    });
+});
+
 
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request
