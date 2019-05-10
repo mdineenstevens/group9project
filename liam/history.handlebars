@@ -45,7 +45,30 @@
         <div class="card mx-auto h-100">
             <div class="card-body">
                 <ul class="a">
-                    
+                    {{#if history.length}} {{!history being the array of quiz results}}
+                        {{#each history}}
+                            <li>
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="QuizTitle" class="col-sm-2 col-form-label font buffer-his">Title:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control-plaintext result-font buffer-his"
+                                                id="QuizTitle" value={{quizTitle}}> {{!quizTitle being title of a taken quiz}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="QuizScore" class="col-sm-2 col-form-label font">Score:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control-plaintext result-font" id="QuizScore"
+                                                value={{quizScore}}> {{!quizScore being the score of a taken quiz}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        {{/each}}
+                    {{else}}
+                        <li>You haven't taken any quizzes</li>
+                    {{/if}}
                 </ul>
             </div>
         </div>
