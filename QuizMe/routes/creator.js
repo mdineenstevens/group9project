@@ -25,13 +25,13 @@ router.get("/createQuestion", async (req, res) => {
     });
 });
 
-router.get("/takeQuiz", async (req, res) => {
-    // res.send('Questions create Page');
-    res.render('Quiz/takeQuiz',{
-        title: "Quiz Start",
-        Creator_path_CSS: true
-    });
-});
+// router.get("/takeQuiz", async (req, res) => {
+//     // res.send('Questions create Page');
+//     res.render('Quiz/takeQuiz',{
+//         title: "Quiz Start",
+//         Creator_path_CSS: true
+//     });
+// });
 
 router.get("/searchQuestion", async (req, res) => {
     // res.send('Questions create Page');
@@ -43,9 +43,12 @@ router.get("/searchQuestion", async (req, res) => {
 
 router.get("/startQuiz", async (req, res) => {
     // res.send('Questions create Page');
+    let e = req.session.error;
+    req.session.error = undefined;
     res.render('Question/tryQuiz',{
         title: "StartQuiz",
-        Creator_search_CSS: true
+        Creator_search_CSS: true,
+        error: e
     });
 });
 
@@ -119,41 +122,7 @@ router.post("/createQuestion", async (req, res) => {
 });
 
 
-router.post("/takeQuiz", async (req, res) => {
-    // const quizzeInfo = req.body;
-    // let field = quizzeInfo.field;
-    const quizzeInfo = {field: "computer"};
-    let field = "computer";
-    // let candidatesId = req.session.userId;
-    let candidatesId = "5cd338ddfc94e897e7beeba2";
 
-    let quizData;
-
-    if(!quizzeInfo){
-        res.status(400).json({ error: "You must provide Effective Input" }).end();
-        return;
-    }
-    if(!field){
-        res.status(400).json({ error: "You must provide a Field" }).end();
-        return;
-    }
-    // console.log(quizzeInfo, field)
-
-    try{
-        console.log(candidatesId, field)
-        quizData = await quizzes.genQuiz(candidatesId,field);
-        console.log(quizData.Questions[0]);
-        res.render("Quiz/takeQuiz", {
-            Questions: quizData.Questions
-        });
-
-    }catch(e){
-        console.log("Here we are")
-      res.status(500).json({ error: e });
-    }
-    
-    
-});
 
 // router.post("/takeQuiz/submit",checkLogin, async (req, res) => {
 //     const answerInfo = req.body;
@@ -169,55 +138,6 @@ router.post("/takeQuiz", async (req, res) => {
 //     }
 
 // });
-
-router.post("/accountUpdate", async (req, res) => {
-    //get the Update infomation(name,OldPassword,NewPassword,identity) frome request
-    const longinInfo = req.body;
-    const name = longinInfo.name;
-    const OldPassword = longinInfo.OldPassword;
-    const NewPassword = longinInfo.NewPassword;
-
-    let userdata;
-    
-     //check the  infomation  
-    if(!longinInfo){
-      res.status(400).json({ error: "You must provide Effective Input" }).end();
-      return;
-    }
-    if(!name){
-      res.status(400).json({ error: "You must provide a name" }).end();
-      return;
-    }
-    if(!OldPassword){
-      res.status(400).json({ error: "You must provide OldPassword" }).end();
-      return;
-    }
-    if(!NewPassword){
-      res.status(400).json({ error: "You must provide NewPassword" }).end();
-      return;
-    }
-    if(!identity){
-      res.status(400).json({ error: "You must provide a Identity" }).end();
-      return;
-    }
-    
-    try{
-      if(identity == 'candidates')
-      {
-          userdata = await candidates.infoUpdate(req.session.userId,OldPassword,NewPassword);
-          res.json(userdata);
-      }else if(identity == 'creators'){
-          userdata = await creators.infoUpdate(req.session.userId,OldPassword,NewPassword);
-          res.json(userdata);
-      }else{
-          throw 'identity data error';
-      } 
-    }catch(e){
-        res.status(500).json({ error: e });
-    }
-  
-    res.send('Account Updata Page');
-  });
 
 
 

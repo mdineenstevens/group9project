@@ -4,6 +4,7 @@ const router = express.Router();
 const data = require("../data");
 const candidates = data.candidates;
 const creators = data.creators;
+const quizzes = data.quizzes;
 
 router.get("/", async (req, res) => {
     // console.log('Register Page');
@@ -168,6 +169,55 @@ router.post("/accountUpdate",async (req, res) => {
     }
   
     res.send('Account Updata Page');
+});
+
+
+
+router.post("/takeQuiz", async (req, res) => {
+    const quizzeInfo = req.body;
+    let field = quizzeInfo.field;
+    console.log(req.body)
+    // const quizzeInfo = {field: "computer"};
+    // let field = "computer";
+    // let candidatesId = req.session.userId;
+    let candidatesId = "5cd338ddfc94e897e7beeba2";
+    let identity = "candidate";
+
+    let quizData;
+    // console.log("BUG")
+    // if(!quizzeInfo){
+    //     res.status(400).json({ error: "You must provide Effective Input" }).end();
+    //     return;
+    // }
+    // if(!field){
+    //     res.status(400).json({ error: "You must provide a Field" }).end();
+    //     return;
+    // }
+    // console.log(quizzeInfo, field)
+
+    try{
+        console.log(candidatesId, field)
+        quizData = await quizzes.genQuiz(candidatesId,field);
+        console.log(quizData.Questions[0]);
+        res.render("Quiz/takeQuiz", {
+            Questions: quizData.Questions,
+            Creator_path_CSS: true
+        });
+
+    }catch(e){
+        console.log("Here we are")
+        if(identity === 'candidate'){
+            req.session.errors = e.toString()
+            console.log(req.session.errors, "error pass IN")
+            res.redirect('/QuizMeCandidate/startQuiz')
+        }else if(identity === 'creator'){
+            req.session.errors = e.toString()
+            res.redirect('/QuizMeCreator/startQuiz')
+        }
+        // res.status(500).json({ error: e });
+    }
+    
+    
 });
 
 module.exports = router;
