@@ -9,7 +9,11 @@ const quizzes = data.quizzes;
 
 router.get("/", async (req, res) => {
     // res.send('Questions create Page');
-    res.json("candidate page")
+    // res.json("candidate page")
+    res.render('mainpage/mainCandidate',{
+        title: "Candidate Main Page",
+        Candidate_main_CSS: true
+    });
 });
 
 router.post("/takeQuiz", async (req, res) => {
