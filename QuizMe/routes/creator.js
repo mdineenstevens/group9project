@@ -149,23 +149,35 @@ router.post("/createQuestion", async (req, res) => {
 });
 
 
+router.post("/SearchResult",async (req, res) => {
+    // let creatorId = req.session.userId;
+    let creatorId = "5cd338e2fc94e897e7beeba3"
+    const ViewInfo = req.body;
+    console.log(ViewInfo)
+    const field = ViewInfo.field;
+    let questionData;
+    // /searchQuestion
 
+    // if(!ViewInfo){
+    //     res.status(400).json({ error: "You must provide Effective Input" }).end();
+    //     return;
+    //   }
+    //   if(!field){
+    //       res.status(400).json({ error: "You must provide a field" }).end();
+    //       return;
+    //   }
 
-// router.post("/takeQuiz/submit",checkLogin, async (req, res) => {
-//     const answerInfo = req.body;
-//     let quizId = answerInfo.quizId;
-//     let Submission = answerInfo.Submission;
-//     let quizData;
-
-//     try{
-//         quizData = await quizzes.grade(quizId,Submission);
-//         res.json(quizData);
-//     }catch(e){
-//       res.status(500).json({ error: e });
-//     }
-
-// });
-
+    try{
+        questionData = await questions.SearchByField(creatorId,field);
+        // res.json(questionData);
+        res.render("Question/listQues",{
+            result: questionData,
+            Show_score: true
+        })
+    }catch(e){
+      res.status(500).json({ error: e });
+  }
+});
 
 
 
