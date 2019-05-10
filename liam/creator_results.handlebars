@@ -35,3 +35,74 @@
     </div>
 </nav>
 </header>
+<section class="section" id="section">
+    <div class="container-fluid">
+        <div class="flex-center h-75">
+            <div class="signin-header">
+                Search Results
+            </div>
+        </div>
+        <div class="card mx-auto h-100">
+            {{#if result.length}}
+                {{#each result}}
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <div>{{creator}}</div>
+                                    <div>{{content}}</div>
+                                    <div>Answers: {{answers}}</div>
+                                    <div>Options</div>
+                                    <ul>
+                                        {{#each options}}
+                                            <li>{{this}}</li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                <div class="col2">
+                                    <button class="btn btn-primary btn-lg my-2 my-sm-0" style="background-color: #1e3799"
+                                    type="submit">Edit Question</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="card-body">
+                    There are no results
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+    <footer class="page-footer font-small pt-4" id="contact">
+
+        <!-- Footer Elements -->
+        <div class="container">
+            <div class="text-center">
+                <p> Contact us at: <a href="mailto:webmaster@example.com">QuizMe@gmail.com</a></p>
+            </div>
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <a class="btn btn-primary btn-lg" href="#home" role="button" style="background-color: #1e3799">Home</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
+
+        </div>
+        <!-- Footer Elements -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#"> QuizMe.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
