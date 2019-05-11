@@ -1,0 +1,78 @@
+<header class="header">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1e3799">
+            <a class="navbar-brand" href="#">
+                <img src="../pictures/quizme.jpg" width="30" height="30" class="d-inline-block align-top" alt="Website Logo">
+                QuizMe!
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mr-4">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link" data-value="about">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#section3" class="nav-link" data-value="about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#section4" class="nav-link " data-value="services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#section2" class="nav-link" data-value="about">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#section5" class="nav-link " data-value="team">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link " data-value="contact">Contact</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+    <section class="section-take">
+        <div class="container-fluid">
+            <div class="flex-center h-75">
+                <div class="signin-header">
+                    Quiz
+                </div>
+            </div>
+            <div class="card mx-auto">
+                <div class="card-body">
+                    <form action="/QuizMeCreator/takeQuiz/submit" method="POST">
+                        <!-- QUESTIONS -->
+                        {{#each Questions}}
+                            <div class="text-center">
+                                <p>{{content}}</p>
+                            </div>
+                            <div class="form-group">
+                                {{#each option}}
+                                    <input type="checkbox" name="option" value={{this}}>{{this}}<br>
+                                {{/each}}
+                                {{!-- <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>Select an Option</option>
+                                    {{#each option}}
+                                        <option value={{this}}>{{this}}</option>
+                                    {{/each}}
+                                </select> --}}
+                            </div>
+                        {{/each}}
+                        <div class="form-group">
+                            <div class="text-center buffer2">
+                                <button type="submit" class="btn btn-block btn-lg" style="background-color: #1e3799">
+                                    <div class="white-text">
+                                        Submit
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
