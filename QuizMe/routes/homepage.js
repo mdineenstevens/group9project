@@ -183,16 +183,6 @@ router.post("/takeQuiz", async (req, res) => {
     let identity = "candidate";
 
     let quizData;
-    // console.log("BUG")
-    // if(!quizzeInfo){
-    //     res.status(400).json({ error: "You must provide Effective Input" }).end();
-    //     return;
-    // }
-    // if(!field){
-    //     res.status(400).json({ error: "You must provide a Field" }).end();
-    //     return;
-    // }
-    // console.log(quizzeInfo, field)
 
     try{
         console.log(candidatesId, field)
@@ -205,10 +195,21 @@ router.post("/takeQuiz", async (req, res) => {
         console.log(Ques_id)
         req.session.Q_id = quizData.Q_id;
         req.session.Ques_id = Ques_id;
-        res.render("Quiz/takeQuiz", {
-            Questions: quizData.Questions,
-            Creator_path_CSS: true
-        });
+        if(identity = "candidate"){
+            res.render("Quiz/takeQuiz", {
+                Questions: quizData.Questions,
+                Creator_path_CSS: true,
+                candidate_type: true
+            });
+        }else if(identity = "creator"){
+            res.render("Quiz/takeQuiz", {
+                Questions: quizData.Questions,
+                Creator_path_CSS: true,
+                creator_type: true
+            });
+        }
+
+        
 
     }catch(e){
         console.log("Here we are")
