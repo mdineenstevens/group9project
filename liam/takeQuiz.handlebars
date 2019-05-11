@@ -51,15 +51,11 @@
                                 <p>{{content}}</p>
                             </div>
                             <div class="form-group">
-                                {{#each option}}
-                                    <input type="checkbox" name="option" value={{this}}>{{this}}<br>
-                                {{/each}}
-                                {{!-- <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Select an Option</option>
+                                <fieldset id="_id">
                                     {{#each option}}
-                                        <option value={{this}}>{{this}}</option>
+                                        <input type="checkbox" name="option" value={{this}}>{{this}}<br>
                                     {{/each}}
-                                </select> --}}
+                                </fieldset>
                             </div>
                         {{/each}}
                         <div class="form-group">
