@@ -88,6 +88,36 @@ router.get("/QuizHistory", async (req, res) => {
     }
 });
 
+router.get('/modifyQues/:id', async (req, res) => {
+    // console.log(req.params.id)
+
+    const Quesresult = await questions.getById(req.params.id)
+
+    req.session.QuesModify = Quesresult;
+
+    console.log(Quesresult)
+    res.render("Question/modifyQues",{
+        Ques: Quesresult,
+        modify_question: true
+    });
+
+});
+
+router.get('/deleteQues/:id', async (req, res) => {
+    // console.log(req.params.id)
+
+    const Quesresult = await questions.getById(req.params.id)
+
+    req.session.Quesdelete = Quesresult;
+
+    console.log(Quesresult)
+    res.render("Question/deleteQues",{
+        Ques: Quesresult,
+        modify_question: true
+    });
+
+});
+
 
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request
@@ -170,6 +200,7 @@ router.post("/SearchResult",async (req, res) => {
     try{
         questionData = await questions.SearchByField(creatorId,field);
         // res.json(questionData);
+        console.log(questionData);
         res.render("Question/listQues",{
             result: questionData,
             Show_score: true
@@ -179,7 +210,86 @@ router.post("/SearchResult",async (req, res) => {
   }
 });
 
+// /QuizMeCreator/modifyQues
 
+router.post("/modifyQues", async (req, res) => {
+    //get the question infomation frome request
+    const newQuestionInfo = req.body;
+    console.log(newQuestionInfo)
+    let questionId = req.session.QuesModify._id;
+    let content = newQuestionInfo.Ques_content;
+    let answers = newQuestionInfo.answers;
+    let options = newQuestionInfo.options;
+    let questionData;
+
+    // req.session.QuesModify
+
+    // let creatorId = "5cd338ddfc94e897e7beeba2";
+    // let content = questionInfo.Ques_content;
+    // let answers = [];
+    // let options = [];
+    // let op_arr = [questionInfo.op1, questionInfo.op2, questionInfo.op3, questionInfo.op4];
+    // let option_arr = [questionInfo.option1, questionInfo.option1, questionInfo.option1, questionInfo.option1];
+
+
+    if(!questionId){
+        res.status(400).json({ error: "You must provide Effective questionId" }).end();
+        return;
+      }
+    if(!content){
+        res.status(400).json({ error: "You must provide Effective content" }).end();
+        return;
+      }
+    if(!answers){
+        res.status(400).json({ error: "You must provide Effective answers" }).end();
+        return;
+      }
+    if(!options){
+        res.status(400).json({ error: "You must provide Effective options" }).end();
+        return;
+      }
+
+
+    if(!Array.isArray(answers)){
+        let a1 = [];
+        a1[0] = answers;
+        answers = a1;
+    }
+    if(!Array.isArray(options)){
+        let a2 = [];
+        a2[0] = options;
+        options = a2;
+    }
+
+    try{
+        questionData = await questions.updateQuestion(questionId,content,answers,options);
+        res.json(questionData);
+    }catch(e){
+      res.status(500).json({ error: e });
+  }
+});
+
+router.post("/deleteQues", async (req, res) => {
+    const questionInfo = req.body;
+    const questionId = questionInfo.questionId;
+    let deleteInfo;
+
+    console.log(req.session.Quesdelete._id)
+
+    // if(!questionId){
+    //   res.status(400).json({ error: "You must provide Effective questionId" }).end();
+    //   return;
+    // }
+
+  try{
+      deleteInfo = await questions.deleteQuestion(req.session.Quesdelete._id);
+      res.send({ success: true })
+    //   res.json(deleteInfo);
+  }catch(e){
+    res.status(500).json({ error: e });
+}
+
+});
 
 
 
