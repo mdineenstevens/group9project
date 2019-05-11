@@ -55,24 +55,24 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Question:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Ques_content" class="form-control" placeholder="Your Question" value={{Ques.content}}>
+                                <input type="text" name="Ques_content" class="form-control" placeholder="Your Question" value="{{Ques.content}}">
                             </div>
                         </div>
                         <p class="text-center">(Please indicate the correct answer(s) below by selecting the
                             checkbox option)</p>
-                        <!-- QUESTION 1 -->
-                        {{#each Ques.answers}}
+                        
+                        {{#each Ques.answers }}
                         <div class="form-row buffer">
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="op1" value="1" id="defaultCheck1" checked>
+                                    <input class="form-check-input" type="checkbox" name="op" value="{{this}}" id="defaultCheck1" checked>
                                     <label class="form-check-label" for="defaultCheck1">
                                         Answer:
                                     </label>
                                 </div>
                             </div>
                             <div class="col-10">
-                                <input type="text" class="form-control" name="option1" placeholder="Option 1" value={{this}}>
+                                <input type="text" class="form-control" name="option" placeholder="Option" value="{{this}}">
                             </div>
                         </div>
                         {{/each}}
@@ -81,14 +81,14 @@
                         <div class="form-row buffer">
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="op3" value="1" id="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" name="op" value="{{this}}" id="defaultCheck1">
                                     <label class="form-check-label" for="defaultCheck1">
                                         Answer:
                                     </label>
                                 </div>
                             </div>
                             <div class="col-10">
-                                <input type="text" class="form-control" name="option1" placeholder="Option 1" value={{this}}>
+                                <input type="text" class="form-control" name="option" placeholder="Option" value="{{this}}">
                             </div>
                         </div>
                         {{/each}}

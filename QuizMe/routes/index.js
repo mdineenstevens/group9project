@@ -32,7 +32,14 @@ const constructorMethod = app => {
 
   app.use("*", (req, res) => {
     // res.redirect('/QuizMe');
-    res.json("somgting wrong")
+    if(req.session.identity === undefined){
+      res.redirect('/QuizMe')
+    }else if(req.session.identity === 'candidate'){
+      res.redirect('/QuizMeCandidate')
+    }else if(req.session.identity === 'creator'){
+      res.redirect('/QuizMeCreator')
+    }
+
   });
 
 };

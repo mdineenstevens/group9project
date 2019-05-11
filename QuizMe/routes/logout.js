@@ -3,9 +3,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
         //clean the session to logout
-        req.session.user = null;
-        req.session.identity = null;
-        req.session.userId = null;
+        req.session.user = undefined;
+        req.session.identity = undefined;
+        req.session.userId = undefined;
         // res.json(req.session);
         res.redirect("/QuizMe");
 });

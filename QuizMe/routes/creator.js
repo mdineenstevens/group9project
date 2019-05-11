@@ -213,14 +213,29 @@ router.post("/SearchResult",async (req, res) => {
 // /QuizMeCreator/modifyQues
 
 router.post("/modifyQues", async (req, res) => {
+    console.log(req.body)
+    // return res.send(req.body);
     //get the question infomation frome request
     const newQuestionInfo = req.body;
     console.log(newQuestionInfo)
     let questionId = req.session.QuesModify._id;
     let content = newQuestionInfo.Ques_content;
-    let answers = newQuestionInfo.answers;
-    let options = newQuestionInfo.options;
-    let questionData;
+    let answers = [];
+    // // newQuestionInfo.op;
+    let options = [];
+    // newQuestionInfo.option;
+    // let questionData;
+    if(newQuestionInfo.op.length === 1){
+        answers.push(newQuestionInfo.op)
+    }else{
+        answers = newQuestionInfo.op;
+    }
+
+    if(newQuestionInfo.option.length === 1){
+        options.push(newQuestionInfo.option)
+    }else{
+        options = newQuestionInfo.option;
+    }
 
     // req.session.QuesModify
 
@@ -262,8 +277,16 @@ router.post("/modifyQues", async (req, res) => {
     }
 
     try{
+
+
+        options = options.filter( function( el ) {
+            return answers.indexOf( el ) < 0;
+        } );
+
         questionData = await questions.updateQuestion(questionId,content,answers,options);
-        res.json(questionData);
+        console.log(questionData)
+        // res.json(questionData);
+        res.send({ success: true })
     }catch(e){
       res.status(500).json({ error: e });
   }
