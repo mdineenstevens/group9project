@@ -43,6 +43,7 @@ router.get("/QuizScore", async (req, res) => {
     req.session.quizData
     console.log(req.session.quizData)
     res.render('Quiz/QuizResult',{
+        title: "Quiz Result",
         Name: req.session.quizData.quizName,
         Score: req.session.quizData.quizScore,
         Show_score: true,
@@ -58,6 +59,7 @@ router.get("/QuizHistory", async (req, res) => {
     try{
         quizzesData = await quizzes.getAllQuiz(candidatesId);
         res.render("Quiz/QuizHistory",{
+            title: "Quiz History",
             history: quizzesData,
             Show_score: true,
             candidade_type: true

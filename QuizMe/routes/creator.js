@@ -66,6 +66,7 @@ router.get("/QuizScore", async (req, res) => {
     // res.send('Questions create Page');
     req.session.quizData
     res.render('Quiz/QuizResult',{
+        title: "Quiz Result",
         Name: req.session.quizData.quizName,
         Score: req.session.quizData.quizScore,
         Show_score: true,
@@ -81,6 +82,7 @@ router.get("/QuizHistory", async (req, res) => {
     try{
         quizzesData = await quizzes.getAllQuiz(candidatesId);
         res.render("Quiz/QuizHistory",{
+            title: "Quiz History",
             history: quizzesData,
             Show_score: true,
             creator_type: true
@@ -100,6 +102,7 @@ router.get('/modifyQues/:id', async (req, res) => {
 
     console.log(Quesresult)
     res.render("Question/modifyQues",{
+        title: "Update Question",
         Ques: Quesresult,
         modify_question: true
     });
@@ -115,6 +118,7 @@ router.get('/deleteQues/:id', async (req, res) => {
 
     console.log(Quesresult)
     res.render("Question/deleteQues",{
+        title: "Delete Question",
         Ques: Quesresult,
         modify_question: true
     });
@@ -205,6 +209,7 @@ router.post("/SearchResult",async (req, res) => {
         // res.json(questionData);
         console.log(questionData);
         res.render("Question/listQues",{
+            title: "Question List",
             result: questionData,
             Show_score: true
         })
