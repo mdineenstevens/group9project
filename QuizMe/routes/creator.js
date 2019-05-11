@@ -135,21 +135,15 @@ router.post("/createQuestion", async (req, res) => {
     let content = questionInfo.Ques_content;
     let answers = [];
     let options = [];
-    let op_arr = [questionInfo.op1, questionInfo.op2, questionInfo.op3, questionInfo.op4];
-    let option_arr = [questionInfo.option1, questionInfo.option1, questionInfo.option1, questionInfo.option1];
+    let op_arr = questionInfo.op;
+    let option_arr = questionInfo.option;
 
-    for(let i=0; i < op_arr.length; i = i+1){
-        if(op_arr[i] === '1'){
-            answers.push(option_arr[i])
-        }else{
-            options.push(option_arr[i])
-        }
-    }
+    console.log(option_arr[op_arr])
+    answers.push(option_arr[op_arr])
+    option_arr.splice(op_arr,op_arr);
+    options = option_arr
+
     console.log(answers, options)
-
-    // let answers = questionInfo.answers;
-    // let options = questionInfo.options;
-    let questionData;
 
     if(!content){
         res.status(400).json({ error: "You must provide Effective content" }).end();
