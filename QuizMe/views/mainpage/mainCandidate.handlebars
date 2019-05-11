@@ -1,0 +1,114 @@
+<header class="header">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1e3799">
+            <a class="navbar-brand" href="http://localhost:3000/QuizMeCandidate">
+                <img src="../pictures/quizme.jpg" width="30" height="30" class="d-inline-block align-top" alt="Website Logo">
+                QuizMe!
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mr-4">
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCandidate" class="nav-link" data-value="about">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCandidate/startQuiz" class="nav-link" data-value="about">Try Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCandidate/QuizHistory" class="nav-link " data-value="team">Quiz History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/logout" class="nav-link " data-value="contact">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="section" id="section">
+        <div class="overlay">
+            <div class="container-fluid">
+                <div class="row1">
+                    <div class="text-center">
+                        <h1 class="blue">User Home</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <div class="circle">
+                                <img src="../pictures/user_search.jpg" class="pic3 rounded mx-auto" width="60" height="60"
+                                    alt="Website Logo">
+                            </div>
+                            <div class="dropdown">
+                            <p class="blue">Search for Quizzes</p>
+                            <a class="btn btn-primary btn-lg" href="http://localhost:3000/QuizMeCandidate/startQuiz" role="button" style="background-color: #1e3799">
+                                Search Quizzes
+                            </a>
+                            {{!-- <div class="dropdown">
+                                <button class="btn btn-primary btn-lg dropdown-toggle" type="button" style="background-color: #1e3799"
+                                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Search Quizzes
+                                </button> --}}
+                                {{!-- <div class="dropdown-menu">
+                                    <form class="px-4 py-3" action="/QuizMeCandidate/takeQuiz" method="POST">
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="field"><br>
+                                        <button class="btn btn-primary" style="background-color: #1e3799" type="submit">Search</button>
+                                    </form>
+                                </div> --}}
+                            </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <div class="circle">
+                                <img src="../pictures/quiz_history.jpg" class="pic4 rounded mx-auto" width="60" height="60"
+                                    alt="Website Logo">
+                            </div>
+                            <p class="blue">Review your old quizzes</p>
+                            <a class="btn btn-primary btn-lg" href="http://localhost:3000/QuizMeCandidate/QuizHistory" role="button" style="background-color: #1e3799">Quiz
+                                History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small pt-4" id="contact">
+
+        <!-- Footer Elements -->
+        <div class="container">
+            <div class="text-center">
+                <p> Contact us at: <a href="mailto:webmaster@example.com">QuizMe@gmail.com</a></p>
+            </div>
+            {{!-- <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <a class="btn btn-primary btn-lg" href="#home" role="button" style="background-color: #1e3799">Home</a>
+                </li>
+            </ul> --}}
+            <!-- Call to action -->
+
+        </div>
+        <!-- Footer Elements -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#"> QuizMe.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>

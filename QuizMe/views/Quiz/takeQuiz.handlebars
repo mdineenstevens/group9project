@@ -1,0 +1,105 @@
+<header class="header">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1e3799">
+            {{#if creator_type}}
+            <a class="navbar-brand" href="http://localhost:3000/QuizMeCreator/">
+                <img src="../pictures/quizme.jpg" width="30" height="30" class="d-inline-block align-top" alt="Website Logo">
+                QuizMe!
+            </a>
+            {{/if}}
+            
+            {{#if candidate_type}}
+            <a class="navbar-brand" href="http://localhost:3000/QuizMeCandidate/">
+                <img src="../pictures/quizme.jpg" width="30" height="30" class="d-inline-block align-top" alt="Website Logo">
+                QuizMe!
+            </a>
+            {{/if}}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {{#if creator_type}}
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mr-4">
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCreator/" class="nav-link" data-value="about">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCreator/createQuestion" class="nav-link" data-value="about">Create
+                            Question</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCreator/searchQuestion" class="nav-link " data-value="services">Search Question</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCreator/startQuiz" class="nav-link" data-value="about">Try Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCreator/QuizHistory" class="nav-link " data-value="team">Quiz History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/logout" class="nav-link " data-value="contact">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if candidade_type}}
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mr-4">
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCandidate" class="nav-link" data-value="about">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCandidate/startQuiz" class="nav-link" data-value="about">Try Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/QuizMeCandidate/QuizHistory" class="nav-link " data-value="team">Quiz History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://localhost:3000/logout" class="nav-link " data-value="contact">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            {{/if}}
+        </nav>
+    </header>
+    <section class="section-take">
+        <div class="container-fluid">
+            <div class="flex-center h-75">
+                <div class="signin-header">
+                    Quiz
+                </div>
+            </div>
+            <div class="card mx-auto">
+                <div class="card-body">
+                    <form action="/QuizMe/QuizSubmit" method="POST">
+                        <!-- QUESTIONS -->
+                        {{#each Questions}}
+                            <div class="text-center">
+                                <p>{{content}}</p>
+                            </div>
+                            <div class="form-group">
+                                <select name="Submission" class="form-control" id="exampleFormControlSelect1">
+                                    <option>Select an Option</option>
+                                    {{#each option}}
+                                        <option value="{{this}}">{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        {{/each}}
+                        <div class="form-group">
+                            <div class="text-center buffer2">
+                                <button type="submit" class="btn btn-block btn-lg" style="background-color: #1e3799">
+                                    <div class="white-text">
+                                        Submit
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

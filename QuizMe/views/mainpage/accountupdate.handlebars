@@ -1,0 +1,173 @@
+<header class="header">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1e3799">
+        <a class="navbar-brand" href="#">
+            <img src="../pictures/quizme.jpg" width="30" height="30" class="d-inline-block align-top" alt="Website Logo">
+            QuizMe!
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-4">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link" data-value="about">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section3" class="nav-link" data-value="about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section4" class="nav-link " data-value="services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section2" class="nav-link" data-value="about">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section5" class="nav-link " data-value="team">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link " data-value="contact">Contact</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
+<section class="section5" id="section5">
+    <div class="container-fluid">
+        <div class="float-center h-75">
+            <div class="text-center">
+                <div class="circle">
+                    <img src="../pictures/quizme.jpg" class="rounded mx-auto" width="60" height="60" alt="Website Logo">
+                </div>
+            </div>
+            <div class="signin-header2">
+                Account Update
+            </div>
+            <div class="card mx-auto">
+                <!-- Card Header -->
+                {{!-- <form id="update-form"> --}}
+                <div class="card-header">
+                    <div class="signin-text">
+                        {{identity}} Information
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Beginning of Form -->
+                    <form id="update-form">
+                        <!-- User-Type -->
+                        {{!-- <div class="input-group form-group">
+                            <select class="form-control" id="user-identity">
+                                <option>Please Select a User Type:</option>
+                                <option>Creator</option>
+                                <option>User</option>
+                            </select>
+                        </div> --}}
+                        <!-- Username -->
+                        {{!-- <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                        </div> --}}
+                        <!-- Password -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="OldPassword" placeholder="Old Password" required="required">
+                        </div>
+                        <!-- Confirm Password -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="NewPassword" placeholder="New Password"
+                                required="required">
+                        </div>
+                        <!-- Terms and Conditions -->
+                        {{!-- <div class="form-group">
+                            <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
+                                <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+                        </div> --}}
+
+                        <!-- Register Button -->
+                        <div id="error-box-up" class="form-group">
+                            
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="button" id="update-btn" class="btn btn-block btn-lg" style="background-color: #1e3799">
+                                <div class="white-text">
+                                    Update</div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="page-footer font-small pt-4" id="contact">
+
+    <!-- Footer Elements -->
+    <div class="container">
+        <div class="text-center">
+            <p> Contact us at: <a href="mailto:webmaster@example.com">QuizMe@gmail.com</a></p>
+        </div>
+        {{!-- <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <a class="btn btn-primary btn-lg" href="#home" role="button" style="background-color: #1e3799">Home</a>
+            </li>
+        </ul> --}}
+        <!-- Call to action -->
+
+    </div>
+    <!-- Footer Elements -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="#"> QuizMe.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("#update-btn").click(async function () {
+            let data = $("#update-form").serialize()
+            console.log(data)
+            try {
+                let result = await axios.post('/QuizMe/accountUpdate', data)
+                let response = result.data
+                if (response.success === true) {
+                    location.href = "/QuizMe"
+                    return
+                }
+                throw new Error(response)
+            }
+            catch (e) {
+                if (e.response) {
+                    $('#error-box-up').text(e.response.data.error)
+                }
+                else {
+                    $('#error-box-up').text(e.message)
+                }
+            }
+
+        })
+    })
+    </script>

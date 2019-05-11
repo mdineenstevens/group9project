@@ -1,0 +1,30 @@
+.welcome{
+ position: absolute;
+ top: 30%;
+ margin: auto;
+ padding: 2em;
+}
+.welcome h1{
+ color: #1e3799;
+}
+.welcome p{
+ font: arial;
+ color:#666; 
+ font-size: 20px;
+ width: 50%;
+ line-height: 1.5;
+}
+.welcome button{
+ border:4px  solid #1e3799;
+ background: #1e3799;
+ color:#fff;
+}
+.welcome {
+    padding-top: 50px;
+}
+.se{
+    border:4px  solid #1e3799;
+    background: #1e3799;
+    color:#fff;
+    margin-left: 15px;
+   }
