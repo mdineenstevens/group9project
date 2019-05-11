@@ -34,7 +34,7 @@ router.get("/startQuiz", async (req, res) => {
         title: "StartQuiz",
         Creator_search_CSS: true,
         error: e,
-        canditade_type: true
+        candidade_type: true
     });
 });
 
@@ -46,7 +46,7 @@ router.get("/QuizScore", async (req, res) => {
         Name: req.session.quizData.quizName,
         Score: req.session.quizData.quizScore,
         Show_score: true,
-        canditade_type: true
+        candidade_type: true
     });
 });
 
@@ -60,7 +60,7 @@ router.get("/QuizHistory", async (req, res) => {
         res.render("Quiz/QuizHistory",{
             history: quizzesData,
             Show_score: true,
-            canditade_type: true
+            candidade_type: true
         });
 
     }catch(e){
