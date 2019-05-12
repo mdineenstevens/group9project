@@ -264,6 +264,8 @@ router.post("/QuizSubmit", async (req, res) => {
 
     try{
         quizData = await quizzes.grade(quizId,Submission);
+        req.session.Ques_id = undefined;
+        req.session.Q_id = undefined;
         // console.log(quizData)
         req.session.quizData = quizData;
         console.log(req.session.quizData)
