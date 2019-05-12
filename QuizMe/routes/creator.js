@@ -134,11 +134,11 @@ router.post("/createQuestion", async (req, res) => {
     const questionInfo = req.body;
     // let creatorId = req.session.userId;
     let creatorId = req.session.user.userId;
-    let content = xss(questionInfo.Ques_content);
+    let content = questionInfo.Ques_content;
     let answers = [];
     let options = [];
-    let op_arr = xss(questionInfo.op);
-    let option_arr = xss(questionInfo.option);
+    let op_arr = questionInfo.op;
+    let option_arr = questionInfo.option;
 
     console.log(option_arr[op_arr])
     answers.push(option_arr[op_arr])
