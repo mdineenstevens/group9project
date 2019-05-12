@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-// const checkCreatorsLogin = require('../middlewares/check').checkCreatorsLogin;
+const checkLogin = require('../middlewares/check').checkLogin;
+const checkCreatorsLogin = require('../middlewares/check').checkCreatorsLogin;
 
 const data = require("../data");
 const questions= data.questions;
 const quizzes = data.quizzes;
+const xss = require("xss");
 
-router.get("/", async (req, res) => {
+router.get("/",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     // res.json()
     res.render('mainpage/mainCreator',{
@@ -17,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 ////////////////////////////////relating to the creator to create a Question////////////////////////////
-router.get("/createQuestion", async (req, res) => {
+router.get("/createQuestion",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/createQues',{
         title: "CreateQuestion",
@@ -33,7 +35,7 @@ router.get("/createQuestion", async (req, res) => {
 //     });
 // });
 
-router.get("/searchQuestion", async (req, res) => {
+router.get("/searchQuestion",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/searchQues',{
         title: "SearchQuestion",
@@ -41,7 +43,7 @@ router.get("/searchQuestion", async (req, res) => {
     });
 });
 
-router.get("/startQuiz", async (req, res) => {
+router.get("/startQuiz",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     let e = req.session.errors;
     req.session.errors = undefined;
@@ -53,30 +55,36 @@ router.get("/startQuiz", async (req, res) => {
     });
 });
 
-router.get("/accountUpdate", async (req, res) => {
+router.get("/accountUpdate",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('mainpage/accountupdate',{
         title: "Account Update",
         HOMEPAGE_AU_CSS: true,
-        identity: "Creator"
+        identity: "Creator",
+        creator_type: true
     });
 });
 
-router.get("/QuizScore", async (req, res) => {
+router.get("/QuizScore",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
-    req.session.quizData
+    let quizInfo = req.session.quizData;
+    let  quizName = quizInfo.quizName;
+    let  quizScore = quizInfo.quizScore
+    
+    req.session.quizData = undefined;
+
     res.render('Quiz/QuizResult',{
         title: "Quiz Result",
-        Name: req.session.quizData.quizName,
-        Score: req.session.quizData.quizScore,
+        Name: quizName,
+        Score: quizScore,
         Show_score: true,
         creator_type: true
     });
 });
 
-router.get("/QuizHistory", async (req, res) => {
+router.get("/QuizHistory",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
-    let candidatesId = "5cd338ddfc94e897e7beeba2";
+    let candidatesId = req.session.user.userId;
     let quizzesData;
 
     try{
@@ -93,14 +101,23 @@ router.get("/QuizHistory", async (req, res) => {
     }
 });
 
-router.get('/modifyQues/:id', async (req, res) => {
-    // console.log(req.params.id)
-
+//Check the question is created by the current creator
+async function checkCurrent(req,res,next){
     const Quesresult = await questions.getById(req.params.id)
+    if(!req.session.user){
+        res.redirect('/QuizMe');
+        return;
+    }else if(req.session.user.userId != Quesresult.creator){
+     res.redirect('/QuizMe');
+     return;
+    }
+    next();
+}
 
+router.get('/modifyQues/:id',checkCurrent,async (req, res) => {
+    const Quesresult = await questions.getById(req.params.id)
     req.session.QuesModify = Quesresult;
 
-    console.log(Quesresult)
     res.render("Question/modifyQues",{
         title: "Update Question",
         Ques: Quesresult,
@@ -109,7 +126,7 @@ router.get('/modifyQues/:id', async (req, res) => {
 
 });
 
-router.get('/deleteQues/:id', async (req, res) => {
+router.get('/deleteQues/:id',checkCurrent,async (req, res) => {
     // console.log(req.params.id)
 
     const Quesresult = await questions.getById(req.params.id)
@@ -131,19 +148,22 @@ router.post("/createQuestion", async (req, res) => {
     console.log(req.body)
     const questionInfo = req.body;
     // let creatorId = req.session.userId;
-    let creatorId = "5cd338ddfc94e897e7beeba2";
+    let creatorId = req.session.user.userId;
     let content = questionInfo.Ques_content;
     let answers = [];
     let options = [];
     let op_arr = questionInfo.op;
     let option_arr = questionInfo.option;
 
-    console.log(option_arr[op_arr])
-    answers.push(option_arr[op_arr])
-    option_arr.splice(op_arr,op_arr);
+    // console.log(option_arr[op_arr])
+    answers.push(option_arr[op_arr]);
+    console.log(op_arr)
+    console.log(option_arr)
+    option_arr.splice(op_arr,1);
+    console.log(option_arr)
     options = option_arr
 
-    console.log(answers, options)
+    // console.log(answers, options)
 
     if(!content){
         res.status(400).json({ error: "You must provide Effective content" }).end();
@@ -182,10 +202,9 @@ router.post("/createQuestion", async (req, res) => {
 
 router.post("/SearchResult",async (req, res) => {
     // let creatorId = req.session.userId;
-    let creatorId = "5cd338e2fc94e897e7beeba3"
+    let creatorId = req.session.user.userId
     const ViewInfo = req.body;
-    console.log(ViewInfo)
-    const field = ViewInfo.field;
+    const field = xss(ViewInfo.field);
     let questionData;
     // /searchQuestion
 
@@ -219,7 +238,7 @@ router.post("/modifyQues", async (req, res) => {
     // return res.send(req.body);
     //get the question infomation frome request
     const newQuestionInfo = req.body;
-    console.log(newQuestionInfo)
+    // console.log(newQuestionInfo)
     let questionId = req.session.QuesModify._id;
     let content = newQuestionInfo.Ques_content;
     let answers = [];
@@ -227,26 +246,27 @@ router.post("/modifyQues", async (req, res) => {
     let options = [];
     // newQuestionInfo.option;
     // let questionData;
-    if(newQuestionInfo.op.length === 1){
-        answers.push(newQuestionInfo.op)
-    }else{
-        answers = newQuestionInfo.op;
+    
+    answers.push(newQuestionInfo.op)
+   
+    
+    for(i=0;i < newQuestionInfo.option.length;i=i+1){
+        if(newQuestionInfo.option[i] !== newQuestionInfo.op){
+            // console.log(newQuestionInfo.option[i])
+            if(newQuestionInfo.option[i] !== ""){
+                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
+                options.push(newQuestionInfo.option[i])
+                // console.log(options)
+            }
+        }
     }
 
-    if(newQuestionInfo.option.length === 1){
-        options.push(newQuestionInfo.option)
-    }else{
-        options = newQuestionInfo.option;
+    // console.log(answers, options)
+
+    if((answers.length + options.length !== 4) || (newQuestionInfo.op === "")){
+        res.status(400).json({ error: "Please make sure there is empty and duplicate option." }).end();
+        return;
     }
-
-    // req.session.QuesModify
-
-    // let creatorId = "5cd338ddfc94e897e7beeba2";
-    // let content = questionInfo.Ques_content;
-    // let answers = [];
-    // let options = [];
-    // let op_arr = [questionInfo.op1, questionInfo.op2, questionInfo.op3, questionInfo.op4];
-    // let option_arr = [questionInfo.option1, questionInfo.option1, questionInfo.option1, questionInfo.option1];
 
 
     if(!questionId){
@@ -287,6 +307,8 @@ router.post("/modifyQues", async (req, res) => {
 
         questionData = await questions.updateQuestion(questionId,content,answers,options);
         console.log(questionData)
+        //clean session
+        req.session.QuesModify = undefined;
         // res.json(questionData);
         res.send({ success: true })
     }catch(e){
@@ -296,10 +318,10 @@ router.post("/modifyQues", async (req, res) => {
 
 router.post("/deleteQues", async (req, res) => {
     const questionInfo = req.body;
-    const questionId = questionInfo.questionId;
+    const questionId = xss(questionInfo.questionId);
     let deleteInfo;
 
-    console.log(req.session.Quesdelete._id)
+    // console.log(req.session.Quesdelete._id)
 
     // if(!questionId){
     //   res.status(400).json({ error: "You must provide Effective questionId" }).end();
@@ -308,6 +330,9 @@ router.post("/deleteQues", async (req, res) => {
 
   try{
       deleteInfo = await questions.deleteQuestion(req.session.Quesdelete._id);
+      //clean session
+      req.session.Quesdelete = undefined;
+
       res.send({ success: true })
     //   res.json(deleteInfo);
   }catch(e){

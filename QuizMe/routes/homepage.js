@@ -5,8 +5,11 @@ const data = require("../data");
 const candidates = data.candidates;
 const creators = data.creators;
 const quizzes = data.quizzes;
+const xss = require("xss");
 
-router.get("/", async (req, res) => {
+const checkNotLogin = require('../middlewares/check').checkNotLogin;
+
+router.get("/",checkNotLogin, async (req, res) => {
     // console.log('Register Page');
     res.render('mainpage/homepage',{
         title: "home page",
@@ -20,9 +23,9 @@ router.post("/register", async (req, res) => {
     // console.log(req.body)
 
     const RegisterInfo = req.body;
-    const name = RegisterInfo.username;
-    const password = RegisterInfo.password;
-    const identity = RegisterInfo.userID;
+    const name = xss(RegisterInfo.username);
+    const password = xss(RegisterInfo.password);
+    const identity = xss(RegisterInfo.userID);
     //check the register infomation
     if(!RegisterInfo){
       res.status(400).json({ error: "You must provide Effective Input" }).end();
@@ -70,9 +73,9 @@ router.post("/login", async (req, res) => {
     // console.log('Register Page');
      //get the register infomation(name,password,identity) frome request
     const loginInfo = req.body;
-    const name = loginInfo.username;
-    const password = loginInfo.password;
-    const identity = loginInfo.userID;
+    const name = xss(loginInfo.username);
+    const password = xss(loginInfo.password);
+    const identity = xss(loginInfo.userID);
     let userdata;
 
     //check the register infomation  
@@ -102,9 +105,21 @@ router.post("/login", async (req, res) => {
         }else{
             throw 'identity data error';
         }
-    req.session.user = userdata.name;
-    req.session.identity = identity;
-    req.session.userId = userdata._id;
+        req.session.user = {
+            username : userdata.name,
+            identity : identity,
+            userId   : userdata._id
+        };
+        /* Session {
+                cookie:
+                { path: '/',
+                  _expires: 2019-05-11T14:05:45.077Z,
+                  originalMaxAge: 600000,
+                  httpOnly: true },
+                user:
+                { username: 'userTest1',
+                  identity: 'creator',
+                  userId: 5cd6cf5eb7f2461f8f68233b } } */
 
     res.send({ success: true })
 
@@ -121,11 +136,12 @@ router.post("/accountUpdate",async (req, res) => {
     // const name = longinInfo.username;
 
 
-    const OldPassword = longinInfo.OldPassword;
-    const NewPassword = longinInfo.NewPassword;
-    const identity = "creators";
+    const OldPassword = xss(longinInfo.OldPassword);
+    const NewPassword = xss(longinInfo.NewPassword);
+    const identity = req.session.user.identity;
+
     // const identity = longinInfo.identity;
-    let userId = "5cd43a344e4c66b0434c4970";
+    let userId = req.session.user.userId;
     let userdata;
     
     //check the  infomation  
@@ -151,12 +167,12 @@ router.post("/accountUpdate",async (req, res) => {
     // }
     
     try{
-      if(identity == 'candidates')
+      if(identity == 'candidate')
       {
           userdata = await candidates.infoUpdate(userId,OldPassword,NewPassword);
           res.send({ success: true })
         //   res.json(userdata);
-      }else if(identity == 'creators'){
+      }else if(identity == 'creator'){
           userdata = await creators.infoUpdate(userId,OldPassword,NewPassword);
           res.send({ success: true })
         //   res.json(userdata);
@@ -167,20 +183,19 @@ router.post("/accountUpdate",async (req, res) => {
         res.status(500).json({ error: e });
     }
   
-    res.send('Account Updata Page');
 });
 
 
 
 router.post("/takeQuiz", async (req, res) => {
     const quizzeInfo = req.body;
-    let field = quizzeInfo.field;
-    console.log(req.body)
+    let field = xss(quizzeInfo.field);
+    // console.log(req.body)
     // const quizzeInfo = {field: "computer"};
     // let field = "computer";
     // let candidatesId = req.session.userId;
-    let candidatesId = "5cd338ddfc94e897e7beeba2";
-    let identity = "candidate";
+    let candidatesId = req.session.user.userId;
+    let identity = req.session.user.identity;
 
     let quizData;
 
@@ -231,7 +246,7 @@ router.post("/QuizSubmit", async (req, res) => {
 
     const answerInfo = req.body;
     console.log(answerInfo)
-    const identity = "candidate";
+    const identity = req.session.user.identity;
     let quizId = req.session.Q_id;
     let Sub_ANS = answerInfo.Submission;
     req.session.Ques_id
@@ -249,6 +264,8 @@ router.post("/QuizSubmit", async (req, res) => {
 
     try{
         quizData = await quizzes.grade(quizId,Submission);
+        req.session.Ques_id = undefined;
+        req.session.Q_id = undefined;
         // console.log(quizData)
         req.session.quizData = quizData;
         console.log(req.session.quizData)
@@ -256,7 +273,7 @@ router.post("/QuizSubmit", async (req, res) => {
         if(identity === 'candidate'){
             res.redirect('/QuizMeCandidate/QuizScore');
         }else if(identity === 'creator'){
-            res.redirect('/QuizCreator/QuizScore');
+            res.redirect('/QuizMeCreator/QuizScore');
         }
         // res.json(quizData);
     }catch(e){

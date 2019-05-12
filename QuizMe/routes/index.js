@@ -32,11 +32,11 @@ const constructorMethod = app => {
 
   app.use("*", (req, res) => {
     // res.redirect('/QuizMe');
-    if(req.session.identity === undefined){
+    if(!req.session.user){
       res.redirect('/QuizMe')
-    }else if(req.session.identity === 'candidate'){
+    }else if(req.session.user.identity === 'candidate'){
       res.redirect('/QuizMeCandidate')
-    }else if(req.session.identity === 'creator'){
+    }else if(req.session.user.identity === 'creator'){
       res.redirect('/QuizMeCreator')
     }
 

@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-// const checkCreatorsLogin = require('../middlewares/check').checkCreatorsLogin;
+const checkLogin = require('../middlewares/check').checkLogin;
+const checkCandidatesLogin = require('../middlewares/check').checkCandidatesLogin;
 
 const data = require("../data");
 const questions= data.questions;
 const quizzes = data.quizzes;
+const xss = require("xss");
 
-router.get("/", async (req, res) => {
+router.get("/",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
     // res.json("candidate page")
     res.render('mainpage/mainCandidate',{
@@ -16,16 +18,17 @@ router.get("/", async (req, res) => {
     });
 });
 
-router.get("/accountUpdate", async (req, res) => {
+router.get("/accountUpdate",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
     res.render('mainpage/accountupdate',{
         title: "Account Update",
         HOMEPAGE_AU_CSS: true,
-        identity: "Candidate"
+        identity: "Candidate",
+        candidade_type: true
     });
 });
 
-router.get("/startQuiz", async (req, res) => {
+router.get("/startQuiz",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
     console.log(req.session.errors)
     let e = req.session.errors;
@@ -38,22 +41,26 @@ router.get("/startQuiz", async (req, res) => {
     });
 });
 
-router.get("/QuizScore", async (req, res) => {
+router.get("/QuizScore",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
-    req.session.quizData
-    console.log(req.session.quizData)
+    let quizInfo = req.session.quizData;
+    let  quizName = quizInfo.quizName;
+    let  quizScore = quizInfo.quizScore
+    
+    req.session.quizData = undefined;
+
     res.render('Quiz/QuizResult',{
         title: "Quiz Result",
-        Name: req.session.quizData.quizName,
-        Score: req.session.quizData.quizScore,
+        Name: quizName,
+        Score: quizScore,
         Show_score: true,
         candidade_type: true
     });
 });
 
-router.get("/QuizHistory", async (req, res) => {
+router.get("/QuizHistory",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
-    let candidatesId = "5cd338ddfc94e897e7beeba2";
+    let candidatesId = req.session.user.userId;
     let quizzesData;
 
     try{
