@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-// const checkCreatorsLogin = require('../middlewares/check').checkCreatorsLogin;
+const checkLogin = require('../middlewares/check').checkLogin;
+const checkCreatorsLogin = require('../middlewares/check').checkCreatorsLogin;
 
 const data = require("../data");
 const questions= data.questions;
 const quizzes = data.quizzes;
 
-router.get("/", async (req, res) => {
+router.get("/",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     // res.json()
     res.render('mainpage/mainCreator',{
@@ -17,7 +18,7 @@ router.get("/", async (req, res) => {
 });
 
 ////////////////////////////////relating to the creator to create a Question////////////////////////////
-router.get("/createQuestion", async (req, res) => {
+router.get("/createQuestion",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/createQues',{
         title: "CreateQuestion",
@@ -33,7 +34,7 @@ router.get("/createQuestion", async (req, res) => {
 //     });
 // });
 
-router.get("/searchQuestion", async (req, res) => {
+router.get("/searchQuestion",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/searchQues',{
         title: "SearchQuestion",
@@ -41,7 +42,7 @@ router.get("/searchQuestion", async (req, res) => {
     });
 });
 
-router.get("/startQuiz", async (req, res) => {
+router.get("/startQuiz",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     let e = req.session.errors;
     req.session.errors = undefined;
@@ -53,7 +54,7 @@ router.get("/startQuiz", async (req, res) => {
     });
 });
 
-router.get("/accountUpdate", async (req, res) => {
+router.get("/accountUpdate",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('mainpage/accountupdate',{
         title: "Account Update",
@@ -62,7 +63,7 @@ router.get("/accountUpdate", async (req, res) => {
     });
 });
 
-router.get("/QuizScore", async (req, res) => {
+router.get("/QuizScore",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     req.session.quizData
     res.render('Quiz/QuizResult',{
@@ -74,7 +75,7 @@ router.get("/QuizScore", async (req, res) => {
     });
 });
 
-router.get("/QuizHistory", async (req, res) => {
+router.get("/QuizHistory",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     let candidatesId = req.session.user.userId;
     let quizzesData;

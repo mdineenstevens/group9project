@@ -6,7 +6,9 @@ const candidates = data.candidates;
 const creators = data.creators;
 const quizzes = data.quizzes;
 
-router.get("/", async (req, res) => {
+const checkNotLogin = require('../middlewares/check').checkNotLogin;
+
+router.get("/",checkNotLogin, async (req, res) => {
     // console.log('Register Page');
     res.render('mainpage/homepage',{
         title: "home page",
