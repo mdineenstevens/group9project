@@ -76,7 +76,7 @@ router.get("/QuizScore", async (req, res) => {
 
 router.get("/QuizHistory", async (req, res) => {
     // res.send('Questions create Page');
-    let candidatesId = "5cd338ddfc94e897e7beeba2";
+    let candidatesId = req.session.user.userId;
     let quizzesData;
 
     try{
