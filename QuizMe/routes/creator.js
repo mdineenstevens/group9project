@@ -7,6 +7,7 @@ const checkCreatorsLogin = require('../middlewares/check').checkCreatorsLogin;
 const data = require("../data");
 const questions= data.questions;
 const quizzes = data.quizzes;
+const xss = require("xss");
 
 router.get("/",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
@@ -133,11 +134,11 @@ router.post("/createQuestion", async (req, res) => {
     const questionInfo = req.body;
     // let creatorId = req.session.userId;
     let creatorId = req.session.user.userId;
-    let content = questionInfo.Ques_content;
+    let content = xss(questionInfo.Ques_content);
     let answers = [];
     let options = [];
-    let op_arr = questionInfo.op;
-    let option_arr = questionInfo.option;
+    let op_arr = xss(questionInfo.op);
+    let option_arr = xss(questionInfo.option);
 
     console.log(option_arr[op_arr])
     answers.push(option_arr[op_arr])
@@ -185,8 +186,7 @@ router.post("/SearchResult",async (req, res) => {
     // let creatorId = req.session.userId;
     let creatorId = req.session.user.userId
     const ViewInfo = req.body;
-    console.log(ViewInfo)
-    const field = ViewInfo.field;
+    const field = xss(ViewInfo.field);
     let questionData;
     // /searchQuestion
 
@@ -297,7 +297,7 @@ router.post("/modifyQues", async (req, res) => {
 
 router.post("/deleteQues", async (req, res) => {
     const questionInfo = req.body;
-    const questionId = questionInfo.questionId;
+    const questionId = xss(questionInfo.questionId);
     let deleteInfo;
 
     console.log(req.session.Quesdelete._id)

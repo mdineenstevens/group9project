@@ -7,6 +7,7 @@ const checkCandidatesLogin = require('../middlewares/check').checkCandidatesLogi
 const data = require("../data");
 const questions= data.questions;
 const quizzes = data.quizzes;
+const xss = require("xss");
 
 router.get("/",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');

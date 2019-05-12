@@ -5,6 +5,7 @@ const data = require("../data");
 const candidates = data.candidates;
 const creators = data.creators;
 const quizzes = data.quizzes;
+const xss = require("xss");
 
 const checkNotLogin = require('../middlewares/check').checkNotLogin;
 
@@ -22,9 +23,9 @@ router.post("/register", async (req, res) => {
     // console.log(req.body)
 
     const RegisterInfo = req.body;
-    const name = RegisterInfo.username;
-    const password = RegisterInfo.password;
-    const identity = RegisterInfo.userID;
+    const name = xss(RegisterInfo.username);
+    const password = xss(RegisterInfo.password);
+    const identity = xss(RegisterInfo.userID);
     //check the register infomation
     if(!RegisterInfo){
       res.status(400).json({ error: "You must provide Effective Input" }).end();
@@ -72,9 +73,9 @@ router.post("/login", async (req, res) => {
     // console.log('Register Page');
      //get the register infomation(name,password,identity) frome request
     const loginInfo = req.body;
-    const name = loginInfo.username;
-    const password = loginInfo.password;
-    const identity = loginInfo.userID;
+    const name = xss(loginInfo.username);
+    const password = xss(loginInfo.password);
+    const identity = xss(loginInfo.userID);
     let userdata;
 
     //check the register infomation  
@@ -135,8 +136,8 @@ router.post("/accountUpdate",async (req, res) => {
     // const name = longinInfo.username;
 
 
-    const OldPassword = longinInfo.OldPassword;
-    const NewPassword = longinInfo.NewPassword;
+    const OldPassword = xss(longinInfo.OldPassword);
+    const NewPassword = xss(longinInfo.NewPassword);
     const identity = req.session.user.identity;
 
     // const identity = longinInfo.identity;
@@ -188,7 +189,7 @@ router.post("/accountUpdate",async (req, res) => {
 
 router.post("/takeQuiz", async (req, res) => {
     const quizzeInfo = req.body;
-    let field = quizzeInfo.field;
+    let field = xss(quizzeInfo.field);
     // console.log(req.body)
     // const quizzeInfo = {field: "computer"};
     // let field = "computer";
