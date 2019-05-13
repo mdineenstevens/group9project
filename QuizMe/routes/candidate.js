@@ -23,7 +23,8 @@ router.get("/accountUpdate",checkCandidatesLogin, async (req, res) => {
     res.render('mainpage/accountupdate',{
         title: "Account Update",
         HOMEPAGE_AU_CSS: true,
-        identity: "Candidate"
+        identity: "Candidate",
+        candidade_type: true
     });
 });
 

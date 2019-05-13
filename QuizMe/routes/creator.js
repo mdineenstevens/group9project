@@ -60,7 +60,8 @@ router.get("/accountUpdate",checkCreatorsLogin,async (req, res) => {
     res.render('mainpage/accountupdate',{
         title: "Account Update",
         HOMEPAGE_AU_CSS: true,
-        identity: "Creator"
+        identity: "Creator",
+        creator_type: true
     });
 });
 
@@ -144,25 +145,24 @@ router.get('/deleteQues/:id',checkCurrent,async (req, res) => {
 
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request
-    console.log(req.body)
+    // console.log(req.body)
     const questionInfo = req.body;
     // let creatorId = req.session.userId;
     let creatorId = req.session.user.userId;
-    let content = questionInfo.Ques_content;
+    let content = xss(questionInfo.Ques_content);
     let answers = [];
     let options = [];
     let op_arr = questionInfo.op;
     let option_arr = questionInfo.option;
-
     // console.log(option_arr[op_arr])
-    answers.push(option_arr[op_arr]);
-    console.log(op_arr)
-    console.log(option_arr)
+    answers.push(xss(option_arr[op_arr]));
     option_arr.splice(op_arr,1);
-    console.log(option_arr)
-    options = option_arr
-
-    // console.log(answers, options)
+    for(let i=0;i<option_arr.length;i++)
+    {
+        options[i] = xss(option_arr[i]);
+    }
+    
+      console.log('answers',answers,'options',options)
 
     if(!content){
         res.status(400).json({ error: "You must provide Effective content" }).end();
