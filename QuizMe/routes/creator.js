@@ -157,10 +157,10 @@ router.post("/createQuestion", async (req, res) => {
 
     // console.log(option_arr[op_arr])
     answers.push(option_arr[op_arr]);
-    console.log(op_arr)
-    console.log(option_arr)
+    // console.log(op_arr)
+    // console.log(option_arr)
     option_arr.splice(op_arr,1);
-    console.log(option_arr)
+    // console.log(option_arr)
     options = option_arr
 
     // console.log(answers, options)
@@ -220,7 +220,7 @@ router.post("/SearchResult",async (req, res) => {
     try{
         questionData = await questions.SearchByField(creatorId,field);
         // res.json(questionData);
-        console.log(questionData);
+        // console.log(questionData);
         res.render("Question/listQues",{
             title: "Question List",
             result: questionData,
@@ -234,7 +234,7 @@ router.post("/SearchResult",async (req, res) => {
 // /QuizMeCreator/modifyQues
 
 router.post("/modifyQues", async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     // return res.send(req.body);
     //get the question infomation frome request
     const newQuestionInfo = req.body;
@@ -254,7 +254,7 @@ router.post("/modifyQues", async (req, res) => {
         if(newQuestionInfo.option[i] !== newQuestionInfo.op){
             // console.log(newQuestionInfo.option[i])
             if(newQuestionInfo.option[i] !== ""){
-                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
+                // console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
                 options.push(newQuestionInfo.option[i])
                 // console.log(options)
             }
@@ -306,7 +306,7 @@ router.post("/modifyQues", async (req, res) => {
         } );
 
         questionData = await questions.updateQuestion(questionId,content,answers,options);
-        console.log(questionData)
+        // console.log(questionData)
         //clean session
         req.session.QuesModify = undefined;
         // res.json(questionData);

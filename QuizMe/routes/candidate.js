@@ -30,7 +30,7 @@ router.get("/accountUpdate",checkCandidatesLogin, async (req, res) => {
 
 router.get("/startQuiz",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
-    console.log(req.session.errors)
+    // console.log(req.session.errors)
     let e = req.session.errors;
     req.session.errors = undefined;
     res.render('Question/tryQuiz',{

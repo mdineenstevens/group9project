@@ -19,7 +19,7 @@ router.get("/",checkNotLogin, async (req, res) => {
 
 router.post("/register", async (req, res) => {
     // console.log('Register Page');
-    console.log("register POST SUCCESS")
+    // console.log("register POST SUCCESS")
     // console.log(req.body)
 
     const RegisterInfo = req.body;
