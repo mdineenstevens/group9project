@@ -24,5 +24,9 @@ The basic data include 4 candidates 5 creators and 100 questions, you can see th
 * Originally Task:Do all route part for the application.
 * Performed：Do all route part, Do the middleware part.
 
-## Additional instructions：
-
+## Additional Instructions：
+1. For the access license management：
+* If you are not logged in, you can only access the main homepage, and access to any other url will be redirected to the main homepage.
+* If you log in as a creator, you can only access the creator function, for any candidate function and main homepage you will be redirected to the creator homepage.
+* If you log in as a candidate, you can only access the candidate function, for any creator function and main homepage you will be redirected to the candidate homepage.
+* For the function of modify question, if you are not this question's creator, you will be redirected to the creator homepage.
