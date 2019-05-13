@@ -145,25 +145,24 @@ router.get('/deleteQues/:id',checkCurrent,async (req, res) => {
 
 router.post("/createQuestion", async (req, res) => {
     //get the question infomation frome request
-    console.log(req.body)
+    // console.log(req.body)
     const questionInfo = req.body;
     // let creatorId = req.session.userId;
     let creatorId = req.session.user.userId;
-    let content = questionInfo.Ques_content;
+    let content = xss(questionInfo.Ques_content);
     let answers = [];
     let options = [];
     let op_arr = questionInfo.op;
     let option_arr = questionInfo.option;
-
     // console.log(option_arr[op_arr])
-    answers.push(option_arr[op_arr]);
-    // console.log(op_arr)
-    // console.log(option_arr)
+    answers.push(xss(option_arr[op_arr]));
     option_arr.splice(op_arr,1);
-    // console.log(option_arr)
-    options = option_arr
-
-    // console.log(answers, options)
+    for(let i=0;i<option_arr.length;i++)
+    {
+        options[i] = xss(option_arr[i]);
+    }
+    
+      console.log('answers',answers,'options',options)
 
     if(!content){
         res.status(400).json({ error: "You must provide Effective content" }).end();
@@ -220,7 +219,7 @@ router.post("/SearchResult",async (req, res) => {
     try{
         questionData = await questions.SearchByField(creatorId,field);
         // res.json(questionData);
-        // console.log(questionData);
+        console.log(questionData);
         res.render("Question/listQues",{
             title: "Question List",
             result: questionData,
@@ -234,7 +233,7 @@ router.post("/SearchResult",async (req, res) => {
 // /QuizMeCreator/modifyQues
 
 router.post("/modifyQues", async (req, res) => {
-    // console.log(req.body)
+    console.log(req.body)
     // return res.send(req.body);
     //get the question infomation frome request
     const newQuestionInfo = req.body;
@@ -254,7 +253,7 @@ router.post("/modifyQues", async (req, res) => {
         if(newQuestionInfo.option[i] !== newQuestionInfo.op){
             // console.log(newQuestionInfo.option[i])
             if(newQuestionInfo.option[i] !== ""){
-                // console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
+                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
                 options.push(newQuestionInfo.option[i])
                 // console.log(options)
             }
@@ -306,7 +305,7 @@ router.post("/modifyQues", async (req, res) => {
         } );
 
         questionData = await questions.updateQuestion(questionId,content,answers,options);
-        // console.log(questionData)
+        console.log(questionData)
         //clean session
         req.session.QuesModify = undefined;
         // res.json(questionData);
