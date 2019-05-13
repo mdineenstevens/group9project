@@ -91,11 +91,12 @@
         <div class="flex-center h-75">
             <div class="signin-header">
                 Quiz
+                <small>Time left: <span id="counter"></span> seconds</small>
             </div>
         </div>
         <div class="card mx-auto">
             <div class="card-body">
-                <form action="/QuizMe/QuizSubmit" method="POST">
+                <form id="quiz-form" action="/QuizMe/QuizSubmit" method="POST">
                     <!-- QUESTIONS -->
                     {{#each Questions}}
                     <div class="text-center">
@@ -124,3 +125,20 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function () {
+        let counter = {{Questions.length}} * 60;
+        let interval = setInterval(function () {
+            console.log(counter)
+            if (counter == 0) {
+                $('#quiz-form').submit();
+                clearInterval(interval);
+            }
+            else {
+                counter --;
+                $('#counter').text(counter);
+            }
+        }, 1000);
+    })
+</script>
