@@ -165,15 +165,15 @@ router.post("/createQuestion", async (req, res) => {
       console.log('answers',answers,'options',options)
 
     if(!content){
-        res.status(400).json({ error: "You must provide Effective content" }).end();
+        res.status(400).json({ error: "Please provide the content." }).end();
         return;
       }
     if(!answers){
-        res.status(400).json({ error: "You must provide Effective answers" }).end();
+        res.status(400).json({ error: "Please select an answer." }).end();
         return;
       }
     if(!options){
-        res.status(400).json({ error: "You must provide Effective options" }).end();
+        res.status(400).json({ error: "Please provide your options." }).end();
         return;
       }
 
@@ -320,22 +320,15 @@ router.post("/deleteQues", async (req, res) => {
     const questionId = xss(questionInfo.questionId);
     let deleteInfo;
 
-    // console.log(req.session.Quesdelete._id)
+    try{
+        deleteInfo = await questions.deleteQuestion(req.session.Quesdelete._id);
+        //clean session
+        req.session.Quesdelete = undefined;
 
-    // if(!questionId){
-    //   res.status(400).json({ error: "You must provide Effective questionId" }).end();
-    //   return;
-    // }
-
-  try{
-      deleteInfo = await questions.deleteQuestion(req.session.Quesdelete._id);
-      //clean session
-      req.session.Quesdelete = undefined;
-
-      res.send({ success: true })
-    //   res.json(deleteInfo);
-  }catch(e){
-    res.status(500).json({ error: e });
+        res.send({ success: true })
+        //   res.json(deleteInfo);
+    }catch(e){
+        res.status(500).json({ error: e });
 }
 
 });

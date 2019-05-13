@@ -76,23 +76,6 @@ router.get("/QuizHistory",checkCandidatesLogin, async (req, res) => {
       res.status(500).json({ error: e });
     }
 });
-// router.post("/takeQuiz/submit",checkLogin, async (req, res) => {
-//     const answerInfo = req.body;
-//     let quizId = answerInfo.quizId;
-//     let Submission = answerInfo.Submission;
-//     let quizData;
-
-//     try{
-//         quizData = await quizzes.grade(quizId,Submission);
-//         res.json(quizData);
-//     }catch(e){
-//       res.status(500).json({ error: e });
-//     }
-
-// });
-
-
-
 
 
 

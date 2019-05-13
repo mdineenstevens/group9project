@@ -74,7 +74,7 @@ function CHKPWType(str){
   if(lenReq && numReq && letter1Req && letter2Req && SpaceReq && otherReq){
     return str;
   }
-  throw `Please make sure your password is valid.`
+  throw `Your password length should be 6-12 including and only including uppercase letter, lowercase letter and number.`
 }
 // console.log(CHKPWType("wH1wH1wH1wH1wH1"))
 
