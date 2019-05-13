@@ -8,7 +8,7 @@ The basic data include 4 candidates 5 creators and 100 questions, you can see th
 * step4:The project will run on the http://localhost:3000/QuizMe 
 
 ## Responsibility for Project
-### Wang, Hangyu
+### **Wang, Hangyu**:
 * 
 
 ### Dineen, Michael
