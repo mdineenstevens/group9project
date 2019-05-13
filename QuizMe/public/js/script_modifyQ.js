@@ -2,11 +2,11 @@ $(document).ready(function () {
     $("#CreateQues-btn").click(async function () {
         let data = $("#CreateQues-form").serialize()
         try {
-            let result = await axios.post('/QuizMeCreator/createQuestion', data)
-            // console.log("Here is:", result)
+            let result = await axios.post('/QuizMeCreator/modifyQues', data)
+            console.log("Here is:", result)
             let response = result.data
             if (response.success === true) {
-                location.href = "/QuizMeCreator/createQuestion"
+                location.href = "/QuizMeCreator/searchQuestion"
                 return
             }
             throw new Error(response)

@@ -1,12 +1,13 @@
 $(document).ready(function () {
-    $("#CreateQues-btn").click(async function () {
-        let data = $("#CreateQues-form").serialize()
+    $("#delQues-btn").click(async function () {
+        //{{!-- let data = $("#delQues-form").serialize() --}}
+        //{{!-- console.log(data) --}}
         try {
-            let result = await axios.post('/QuizMeCreator/createQuestion', data)
+            let result = await axios.post('/QuizMeCreator/deleteQues')
             // console.log("Here is:", result)
             let response = result.data
             if (response.success === true) {
-                location.href = "/QuizMeCreator/createQuestion"
+                location.href = "/QuizMeCreator/searchQuestion"
                 return
             }
             throw new Error(response)
@@ -19,7 +20,5 @@ $(document).ready(function () {
                 $('#error-box-crt').text(e.message)
             }
         }
-
     })
-
 })
