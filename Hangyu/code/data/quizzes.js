@@ -169,13 +169,13 @@ async function grade(Quiz_id, Submission){
 
     return await getQuizById(Quiz_id);
 }
-// let Quiz_id = "5cbbbe9fe31fa229b6308e46";
-// let Submission = [
-//     {QuesId: "5cbbbe76bd485729b2ee6da2", answer: ["12"]},
+let Quiz_id = "5cc8be4921a71d4fa6ae1c29";
+let Submission = [
+    {QuesId: "5cc8b921b2e1ee4c362359a3", answer: ["ABC", "CPU"]}
 //     {QuesId: "5cbbbe800ce4ec29b375adac", answer: ["100", "12","123"]},
 //     {QuesId: "5cbbbe9fe31fa229b6308e45", answer: ["100", "12","123"]}
-// ];
-// grade(Quiz_id, Submission).then(result => console.log(result));
+ ];
+grade(Quiz_id, Submission).then(result => console.log(result));
 
 module.exports = {
     genQuiz,
