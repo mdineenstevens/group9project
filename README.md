@@ -10,7 +10,7 @@ The basic data include 4 candidates 5 creators and 100 questions, you can see th
 ## Responsibility for Project
 ### Wang Hangyu:
 * Originally Task: Do all data part for the application.
-* Performed：Finish all data part including seeding task; integration route and views(redesign and rebuild the router's url, fix some issues in html and handlebar, convert some htmls to handlebars), implement some missing features; finish front js; organize and coordinate the work of others.
+* Performed：Finish all data part including seeding task; integration route and views(redesign and rebuild the router's url, fix some issues in html and handlebar, convert some htmls to handlebars), implement some missing features; finish front script.js(s).
 
 ### Dineen Michael:
 * Originally Task: Do all front htmls and all realting css for the application.
