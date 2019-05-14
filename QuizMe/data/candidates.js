@@ -1,6 +1,6 @@
 const mongoCollections = require("./config/mongoCollections");
 const candidates = mongoCollections.candidates;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 const { ObjectId } = require('mongodb');
 const CHK = require('./dataCHK/checkers.js');

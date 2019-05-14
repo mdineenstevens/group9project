@@ -13,22 +13,22 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-4">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link" data-value="about">Home</a>
+                    <a href="#home" class="nav-link enhance-contrast" data-value="about">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#AboutUs" class="nav-link" data-value="about">About Us</a>
+                    <a href="#AboutUs" class="nav-link enhance-contrast" data-value="about">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#services" class="nav-link " data-value="services">Services</a>
+                    <a href="#services" class="nav-link enhance-contrast" data-value="services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#login" class="nav-link" data-value="about">Sign In</a>
+                    <a href="#login" class="nav-link enhance-contrast" data-value="about">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#register" class="nav-link " data-value="team">Register</a>
+                    <a href="#register" class="nav-link enhance-contrast" data-value="team">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link " data-value="contact">Contact</a>
+                    <a href="#contact" class="nav-link enhance-contrast" data-value="contact">Contact</a>
                 </li>
             </ul>
 
@@ -44,8 +44,8 @@
                 <p> QuizMe provides an easy-to-use platform for creating, sharing, and taking
                     user-created quizzes
                 </p>
-                <a class="btn btn-primary btn-lg" href="#AboutUs" role="button" style="background-color: #1e3799">Learn
-                    More </a>
+                <a class="btn btn-primary btn-lg" href="#AboutUs" role="button" style="background-color: #1e3799">About
+                    Us </a>
 
                 <a class="btn btn-primary btn-lg" href="#login" role="button" style="background-color: #1e3799">Sign
                     In </a>
@@ -63,9 +63,6 @@
                     <img src="pictures/quizme.jpg" class="rounded mx-auto" width="60" height="60" alt="Website Logo">
                 </div>
             </div>
-            <div class="signin-header">
-                Welcome Back!
-            </div>
             <div class="card mx-auto">
                 <div class="card-header">
                     <div class="signin-text">
@@ -77,25 +74,33 @@
                         <!-- User-Type -->
                         <div class="input-group form-group">
                             {{!-- <select class="form-control" id="user-identity" name="userID"> --}}
-                            <select class="form-control" name="userID">
-                                <option>Please Select a User Type:</option>
-                                <option value="creator">Creator</option>
-                                <option value="candidate">Candidate</option>
-                            </select>
+                                <select class="form-control" name="userID">
+                                    <option>Please Select a User Type:</option>
+                                    <option value="creator">Creator</option>
+                                    <option value="candidate">Candidate</option>
+                                </select>
                         </div>
                         <!-- Username -->
+                        <label for="username">
+                            Username
+                        </label>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="username" placeholder="username" required>
+                            <input type="text" class="form-control" name="username" placeholder="username" id="username"
+                                required>
                         </div>
                         <!-- Password -->
+                        <label for="password">
+                            Password
+                        </label>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="password" class="form-control" name="password" placeholder="password" required>
+                            <input type="password" class="form-control" name="password" placeholder="password" id="password"
+                                required>
                         </div>
                         <!-- Remember Me -->
                         {{!-- <div class="form-group">
@@ -103,7 +108,7 @@
                                 Me</label>
                         </div> --}}
                         <div id="error-box-login" class="form-group">
-                            
+
                         </div>
                         <div class="form-group">
                             <button type="button" id="login-btn" class="btn btn-block btn-lg" style="background-color: #1e3799">
@@ -115,10 +120,7 @@
                     </form>
                     <div class="d-flex justify-content-center links">
                         Don't have an account? <br>
-                        <a href="#register">Sign Up</a>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <a href="#">Forgot your password?</a>
+                        <a href="#register" class="enhance-contrast2">Sign Up</a>
                     </div>
                 </div>
             </div>
@@ -134,11 +136,11 @@
                 <h1 class="text-center">About Us</h1>
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
-                        <img src="pictures/section2a.jpg" class="img-fluid">
+                        <img src="pictures/section2a.jpg" class="img-fluid" alt="About us Picture">
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12 desc">
 
-                        <h3>Our Mission: </h3>
+                        <h2 class="make-it-blue">Our Mission: </h2>
                         <p>
                             Unlike other quiz-taking platforms, QuizMe is driven by simplicity and convenience.
                             We have streamlined the quiz-taking process to give users the tools they need to
@@ -188,7 +190,7 @@
                     <div class="circle2">
                         <img src="pictures/creator2.jpg" class="rounded mx-auto pic4" width="60" height="50" alt="Website Logo">
                     </div>
-                    <p class="blue">Share your quiz questions with other creators</p>
+                    <p class="blue">Try quiz questions from all creators</p>
                 </div>
             </div>
         </div>
@@ -220,9 +222,9 @@
                     <img src="pictures/quizme.jpg" class="rounded mx-auto" width="60" height="60" alt="Website Logo">
                 </div>
             </div>
-            <div class="signin-header2">
+            {{!-- <div class="signin-header2">
                 Join QuizMe!
-            </div>
+            </div> --}}
             <div class="card mx-auto">
                 <!-- Card Header -->
                 <div class="card-header">
@@ -236,44 +238,50 @@
                         <!-- User-Type -->
                         <div class="input-group form-group">
                             {{!-- <select class="form-control" id="user-identity" name="userID"> --}}
-                            <select class="form-control" name="userID">
-                                <option>Please Select a User Type:</option>
-                                <option value="creator">Creator</option>
-                                <option value="candidate">Candidate</option>
-                            </select>
+                                <select class="form-control" name="userID">
+                                    <option>Please Select a User Type:</option>
+                                    <option value="creator">Creator</option>
+                                    <option value="candidate">Candidate</option>
+                                </select>
                         </div>
                         <!-- Username -->
+                        <label for="username-register">
+                            Username
+                        </label>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                            <input type="text" class="form-control" name="username" placeholder="Username" id="username-register"
+                                required="required">
                         </div>
                         <!-- Password -->
+                        <label for="password-register">
+                            Password
+                        </label>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+                            <input type="password" class="form-control" name="password" placeholder="Password" id="password-register"
+                                required="required">
                         </div>
                         <!-- Confirm Password -->
+                        <label for="confirm-register">
+                            Confirm Password
+                        </label>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-check-square"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="confirm_password" placeholder="Confirm Password"
-                                required="required">
-                        </div>
-                        <!-- Terms and Conditions -->
-                        <div class="form-group">
-                            <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
-                                <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+                            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
+                                id="confirm-register" required="required">
                         </div>
 
                         <!-- error -->
                         <div id="error-box-reg" class="form-group">
                             {{!-- {{#if HasRegErr}}
-                                <p> {{RegErr}} </p>
+                            <p> {{RegErr}} </p>
                             {{/if}} --}}
                         </div>
 
@@ -297,7 +305,7 @@
     <!-- Footer Elements -->
     <div class="container">
         <div class="text-center">
-            <p> Contact us at: <a href="mailto:webmaster@example.com">QuizMe@gmail.com</a></p>
+            <p> Contact us at: <a href="mailto:webmaster@example.com" class="enhance-contrast2">QuizMe@gmail.com</a></p>
         </div>
         {{!-- <ul class="list-unstyled list-inline text-center py-2">
             <li class="list-inline-item">
@@ -310,69 +318,11 @@
     <!-- Footer Elements -->
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="#"> QuizMe.com</a>
+        <a href="#" class="enhance-contrast2"> QuizMe.com</a>
     </div>
     <!-- Copyright -->
 
 </footer>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-{{!-- <script src="../../public/js/script.js"></script> --}}
-<script>
-    $(document).ready(function () {
-        $("#register-btn").click(async function () {
-            let data = $("#register-form").serialize()
-            try {
-                let result = await axios.post('/QuizMe/register', data)
-                let response = result.data
-                if (response.success === true) {
-                    location.href = "/QuizMe"
-                    return
-                }
-                throw new Error(response)
-            }
-            catch (e) {
-                if (e.response) {
-                    $('#error-box-reg').text(e.response.data.error)
-                }
-                else {
-                    $('#error-box-reg').text(e.message)
-                }
-            }
 
-        })
-         $("#login-btn").click(async function () {
-            let data = $("#login-form").serialize()
-            let data_arr = $("#login-form").serializeArray()
-            try {
-                let result = await axios.post('/QuizMe/login', data)
-                let response = result.data
-                if (response.success === true) {
-                    console.log(data_arr[0].value)
-                    if(data_arr[0].value === 'creator'){
-                        location.href = "/QuizMeCreator"
-                    }else if(data_arr[0].value === 'candidate'){
-                        location.href = "/QuizMeCandidate"
-                    }
-                    return
-                }
-                throw new Error(response)
-            }
-            catch (e) {
-                if (e.response) {
-                    $('#error-box-login').text(e.response.data.error)
-                }
-                else {
-                    $('#error-box-login').text(e.message)
-                }
-            }
-
-        })
-    })
-</script>
+{{!-- <script src="tota11y.min.js"></script> --}}
+<script src="js/script_home.js"></script>

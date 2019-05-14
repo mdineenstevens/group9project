@@ -1,5 +1,5 @@
 {
-  "name": "quizMe",
+  "name": "QuizMe",
   "version": "1.0.0",
   "description": "This is made for the cs546 project.",
   "main": "app.js",
@@ -11,13 +11,15 @@
   "author": "Hangyu Wang, Michael Dineen, Chenyu Tian, Liam Nagel",
   "license": "MIT",
   "dependencies": {
+    "@khanacademy/tota11y": "^0.2.0",
     "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.4",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.2",
     "express-session": "^1.16.1",
-    "mongodb": "^2.1.18",
+    "mongodb": "^2.2.36",
     "xss": "^1.0.6"
   }
 }

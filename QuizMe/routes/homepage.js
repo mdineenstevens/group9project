@@ -19,7 +19,7 @@ router.get("/",checkNotLogin, async (req, res) => {
 
 router.post("/register", async (req, res) => {
     // console.log('Register Page');
-    console.log("register POST SUCCESS")
+    // console.log("register POST SUCCESS")
     // console.log(req.body)
 
     const RegisterInfo = req.body;
@@ -28,23 +28,23 @@ router.post("/register", async (req, res) => {
     const identity = xss(RegisterInfo.userID);
     //check the register infomation
     if(!RegisterInfo){
-      res.status(400).json({ error: "You must provide Effective Input" }).end();
+      res.status(400).json({ error: "Please make sure no empty input." }).end();
       return;
     }
     if(!name){
-        res.status(400).json({ error: "You must provide a Name" }).end();
+        res.status(400).json({ error: "Please provide a username." }).end();
         return;
     }
     if(!password){
-        res.status(400).json({ error: "You must provide a Password" }).end();
+        res.status(400).json({ error: "Please provide a password" }).end();
         return;
     }
     if(!identity){
-        res.status(400).json({ error: "You must provide a Identity" }).end();
+        res.status(400).json({ error: "Please select an identity." }).end();
         return;
     }
     if(password !== RegisterInfo.confirm_password){
-        res.status(400).json({ error: "Please Comfirm Your Password."}).end();
+        res.status(400).json({ error: "Please confirm your password."}).end();
         return;
     }
 
@@ -59,7 +59,7 @@ router.post("/register", async (req, res) => {
               const newCreator = await creators.registar(name,password);
             //   res.json(nekwCreator);
           }else{
-              throw 'identity data error';
+              throw 'Please select an identity.';
           }
         //   res.redirect("/login")
         //   res.redirect("/register")
@@ -80,19 +80,19 @@ router.post("/login", async (req, res) => {
 
     //check the register infomation  
     if(!loginInfo){
-        res.status(400).json({ error: "You must provide Effective Input" }).end();
+        res.status(400).json({ error: "Please make sure no empty input." }).end();
         return;
     }
     if(!name){
-        res.status(400).json({ error: "You must provide a Name" }).end();
+        res.status(400).json({ error: "Please provide your username." }).end();
         return;
     }
     if(!password){
-        res.status(400).json({ error: "You must provide a Password" }).end();
+        res.status(400).json({ error: "Please provide your password." }).end();
         return;
     }
     if(!identity){
-        res.status(400).json({ error: "You must provide a Identity" }).end();
+        res.status(400).json({ error: "Please select your identity." }).end();
         return;
     }
 
@@ -103,7 +103,7 @@ router.post("/login", async (req, res) => {
         }else if(identity == 'creator'){
             userdata = await creators.login(name,password);
         }else{
-            throw 'identity data error';
+            throw 'Please select your identity.';
         }
         req.session.user = {
             username : userdata.name,
@@ -146,7 +146,7 @@ router.post("/accountUpdate",async (req, res) => {
     
     //check the  infomation  
     if(!longinInfo){
-      res.status(400).json({ error: "You must provide Effective Input" }).end();
+      res.status(400).json({ error: "Please make sure no empty input." }).end();
       return;
     }
     // if(!name){
@@ -154,11 +154,11 @@ router.post("/accountUpdate",async (req, res) => {
     //   return;
     // }
     if(!OldPassword){
-      res.status(400).json({ error: "You must provide OldPassword" }).end();
+      res.status(400).json({ error: "Please provide your old password." }).end();
       return;
     }
     if(!NewPassword){
-      res.status(400).json({ error: "You must provide NewPassword" }).end();
+      res.status(400).json({ error: "Please provide your new password." }).end();
       return;
     }
     // if(!identity){
@@ -200,14 +200,14 @@ router.post("/takeQuiz", async (req, res) => {
     let quizData;
 
     try{
-        console.log(candidatesId, field)
+        // console.log(candidatesId, field)
         quizData = await quizzes.genQuiz(candidatesId,field);
-        console.log(quizData.Questions[0]);
+        // console.log(quizData.Questions[0]);
         let Ques_id = [];
         for(let i=0;i<quizData.Questions.length;i=i+1){
             Ques_id.push(quizData.Questions[i]._id)
         }
-        console.log(Ques_id)
+        // console.log(Ques_id)
         req.session.Q_id = quizData.Q_id;
         req.session.Ques_id = Ques_id;
         if(identity = "candidate"){
@@ -227,10 +227,10 @@ router.post("/takeQuiz", async (req, res) => {
         
 
     }catch(e){
-        console.log("Here we are")
+        // console.log("Here we are")
         if(identity === 'candidate'){
             req.session.errors = e.toString()
-            console.log(req.session.errors, "error pass IN")
+            // console.log(req.session.errors, "error pass IN")
             res.redirect('/QuizMeCandidate/startQuiz')
         }else if(identity === 'creator'){
             req.session.errors = e.toString()
@@ -245,7 +245,7 @@ router.post("/takeQuiz", async (req, res) => {
 router.post("/QuizSubmit", async (req, res) => {
 
     const answerInfo = req.body;
-    console.log(answerInfo)
+    // console.log(answerInfo)
     const identity = req.session.user.identity;
     let quizId = req.session.Q_id;
     let Sub_ANS = answerInfo.Submission;
@@ -259,7 +259,7 @@ router.post("/QuizSubmit", async (req, res) => {
         Submission.push(temp)
     }
 
-    console.log(Submission)
+    // console.log(Submission)
     let quizData;
 
     try{
@@ -268,7 +268,7 @@ router.post("/QuizSubmit", async (req, res) => {
         req.session.Q_id = undefined;
         // console.log(quizData)
         req.session.quizData = quizData;
-        console.log(req.session.quizData)
+        // console.log(req.session.quizData)
 
         if(identity === 'candidate'){
             res.redirect('/QuizMeCandidate/QuizScore');

@@ -27,14 +27,6 @@ router.get("/createQuestion",checkCreatorsLogin,async (req, res) => {
     });
 });
 
-// router.get("/takeQuiz", async (req, res) => {
-//     // res.send('Questions create Page');
-//     res.render('Quiz/takeQuiz',{
-//         title: "Quiz Start",
-//         Creator_path_CSS: true
-//     });
-// });
-
 router.get("/searchQuestion",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/searchQues',{
@@ -133,7 +125,7 @@ router.get('/deleteQues/:id',checkCurrent,async (req, res) => {
 
     req.session.Quesdelete = Quesresult;
 
-    console.log(Quesresult)
+    // console.log(Quesresult)
     res.render("Question/deleteQues",{
         title: "Delete Question",
         Ques: Quesresult,
@@ -156,26 +148,55 @@ router.post("/createQuestion", async (req, res) => {
     let option_arr = questionInfo.option;
     // console.log(option_arr[op_arr])
     answers.push(xss(option_arr[op_arr]));
+    console.log(answers);
     option_arr.splice(op_arr,1);
-    for(let i=0;i<option_arr.length;i++)
+    for(let i = 0; i < option_arr.length; i++)
     {
-        options[i] = xss(option_arr[i]);
+        if(xss(option_arr[i]) !== ""){
+            options.push(xss(option_arr[i]))
+        }
     }
-    
-      console.log('answers',answers,'options',options)
 
+    
     if(!content){
-        res.status(400).json({ error: "You must provide Effective content" }).end();
+        res.status(400).json({ error: "Please provide the content." }).end();
         return;
-      }
+    }
+
+    if(options.length+answers.length<4){
+        res.status(400).json({ error: "Please make sure no empty option." }).end();
+        return;
+    }
+
+    if(answers[0]===""){
+        res.status(400).json({ error: "Please select an answer." }).end();
+        return;
+    }
+
     if(!answers){
-        res.status(400).json({ error: "You must provide Effective answers" }).end();
+        res.status(400).json({ error: "Please select an answer." }).end();
         return;
-      }
+    
+    }
     if(!options){
-        res.status(400).json({ error: "You must provide Effective options" }).end();
+        res.status(400).json({ error: "Please provide your options." }).end();
         return;
-      }
+    }
+
+    for(let i=0; i < options.length;i=i+1){
+        if(answers[0]===options[i]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
+
+    for(let i=0; i < options.length;i=i+1){
+        for(let j=i+1; j < options.length;j=j+1)
+        if(options[i]===options[j]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
 
     if(!Array.isArray(answers)){
         let a1 = [];
@@ -219,7 +240,7 @@ router.post("/SearchResult",async (req, res) => {
     try{
         questionData = await questions.SearchByField(creatorId,field);
         // res.json(questionData);
-        console.log(questionData);
+        // console.log(questionData);
         res.render("Question/listQues",{
             title: "Question List",
             result: questionData,
@@ -237,7 +258,7 @@ router.post("/modifyQues", async (req, res) => {
     // return res.send(req.body);
     //get the question infomation frome request
     const newQuestionInfo = req.body;
-    // console.log(newQuestionInfo)
+    console.log(newQuestionInfo)
     let questionId = req.session.QuesModify._id;
     let content = newQuestionInfo.Ques_content;
     let answers = [];
@@ -246,21 +267,30 @@ router.post("/modifyQues", async (req, res) => {
     // newQuestionInfo.option;
     // let questionData;
     
-    answers.push(newQuestionInfo.op)
-   
-    
-    for(i=0;i < newQuestionInfo.option.length;i=i+1){
-        if(newQuestionInfo.option[i] !== newQuestionInfo.op){
-            // console.log(newQuestionInfo.option[i])
-            if(newQuestionInfo.option[i] !== ""){
-                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
-                options.push(newQuestionInfo.option[i])
-                // console.log(options)
-            }
-        }
-    }
+    let temp_option = [];
+    temp_option.push(xss(newQuestionInfo.option[1]));
+    temp_option.push(xss(newQuestionInfo.option[2]));
+    temp_option.push(xss(newQuestionInfo.option[3]));
+    temp_option.push(xss(newQuestionInfo.option[0]));
 
-    // console.log(answers, options)
+  
+    answers.push(xss(temp_option[newQuestionInfo.op]));
+
+    temp_option.splice(newQuestionInfo.op,1);
+    options = temp_option;
+    
+    // for(i=0;i < temp_option.length;i=i+1){
+    //     if(temp_option[i] !== answers[0]){
+    //         // console.log(newQuestionInfo.option[i])
+    //         if(temp_option[i] !== ""){
+    //             console.log(temp_option[i], temp_option[i] !== "")
+    //             options.push(temp_option[i])
+    //             // console.log(options)
+    //         }
+    //     }
+    // }
+
+     console.log(answers, options)
 
     if((answers.length + options.length !== 4) || (newQuestionInfo.op === "")){
         res.status(400).json({ error: "Please make sure there is empty and duplicate option." }).end();
@@ -269,21 +299,37 @@ router.post("/modifyQues", async (req, res) => {
 
 
     if(!questionId){
-        res.status(400).json({ error: "You must provide Effective questionId" }).end();
+        res.status(400).json({ error: "Please provide Effective questionId" }).end();
         return;
       }
     if(!content){
-        res.status(400).json({ error: "You must provide Effective content" }).end();
+        res.status(400).json({ error: "Please provide the content." }).end();
         return;
       }
     if(!answers){
-        res.status(400).json({ error: "You must provide Effective answers" }).end();
+        res.status(400).json({ error: "Please select an answer." }).end();
         return;
       }
     if(!options){
-        res.status(400).json({ error: "You must provide Effective options" }).end();
+        res.status(400).json({ error: "Please provide options." }).end();
         return;
       }
+
+    
+    for(let i=0; i < options.length;i=i+1){
+        if(answers[0]===options[i]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
+
+    for(let i=0; i < options.length;i=i+1){
+        for(let j=i+1; j < options.length;j=j+1)
+        if(options[i]===options[j]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
 
 
     if(!Array.isArray(answers)){
@@ -320,22 +366,15 @@ router.post("/deleteQues", async (req, res) => {
     const questionId = xss(questionInfo.questionId);
     let deleteInfo;
 
-    // console.log(req.session.Quesdelete._id)
+    try{
+        deleteInfo = await questions.deleteQuestion(req.session.Quesdelete._id);
+        //clean session
+        req.session.Quesdelete = undefined;
 
-    // if(!questionId){
-    //   res.status(400).json({ error: "You must provide Effective questionId" }).end();
-    //   return;
-    // }
-
-  try{
-      deleteInfo = await questions.deleteQuestion(req.session.Quesdelete._id);
-      //clean session
-      req.session.Quesdelete = undefined;
-
-      res.send({ success: true })
-    //   res.json(deleteInfo);
-  }catch(e){
-    res.status(500).json({ error: e });
+        res.send({ success: true })
+        //   res.json(deleteInfo);
+    }catch(e){
+        res.status(500).json({ error: e });
 }
 
 });

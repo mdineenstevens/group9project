@@ -2,11 +2,10 @@ $(document).ready(function () {
     $("#register-btn").click(async function () {
         let data = $("#register-form").serialize()
         try {
-            let result = await axios.post('/register', data)
-            console.log(result)
+            let result = await axios.post('/QuizMe/register', data)
             let response = result.data
             if (response.success === true) {
-                location.href = "/login"
+                location.href = "/QuizMe"
                 return
             }
             throw new Error(response)
@@ -20,16 +19,20 @@ $(document).ready(function () {
             }
         }
 
-    });
-
+    })
     $("#login-btn").click(async function () {
         let data = $("#login-form").serialize()
+        let data_arr = $("#login-form").serializeArray()
         try {
-            let result = await axios.post('/login', data)
-            console.log(result)
+            let result = await axios.post('/QuizMe/login', data)
             let response = result.data
             if (response.success === true) {
-                location.href = "/login"
+                console.log(data_arr[0].value)
+                if (data_arr[0].value === 'creator') {
+                    location.href = "/QuizMeCreator"
+                } else if (data_arr[0].value === 'candidate') {
+                    location.href = "/QuizMeCandidate"
+                }
                 return
             }
             throw new Error(response)
@@ -42,5 +45,6 @@ $(document).ready(function () {
                 $('#error-box-login').text(e.message)
             }
         }
-    });
+
+    })
 })

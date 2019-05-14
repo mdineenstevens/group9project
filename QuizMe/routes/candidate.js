@@ -30,7 +30,7 @@ router.get("/accountUpdate",checkCandidatesLogin, async (req, res) => {
 
 router.get("/startQuiz",checkCandidatesLogin, async (req, res) => {
     // res.send('Questions create Page');
-    console.log(req.session.errors)
+    // console.log(req.session.errors)
     let e = req.session.errors;
     req.session.errors = undefined;
     res.render('Question/tryQuiz',{
@@ -76,23 +76,6 @@ router.get("/QuizHistory",checkCandidatesLogin, async (req, res) => {
       res.status(500).json({ error: e });
     }
 });
-// router.post("/takeQuiz/submit",checkLogin, async (req, res) => {
-//     const answerInfo = req.body;
-//     let quizId = answerInfo.quizId;
-//     let Submission = answerInfo.Submission;
-//     let quizData;
-
-//     try{
-//         quizData = await quizzes.grade(quizId,Submission);
-//         res.json(quizData);
-//     }catch(e){
-//       res.status(500).json({ error: e });
-//     }
-
-// });
-
-
-
 
 
 
