@@ -89,6 +89,8 @@
 ## Proposals：
 * see in proposals file. There are several modifidacation, but all modification are informed and allowed by professor. Thank you for your understanding.
 
+## Results：
+* All core functions are achieved.
 
 
 
