@@ -55,19 +55,19 @@
 * **step4**:The project will run on the http://localhost:3000/QuizMe 
 
 ## Contribution for Project
-### Wang Hangyu:
+### Wang, Hangyu:
 * Originally Task: Do all data part for the application.
 * Performed：Finish all data part including seeding task; integration routes and views(redesign and rebuild the router's url, fix some issues in html and handlebar, convert some htmls to handlebars), implement some missing features; finish front script.js(s).
 
-### Dineen Michael:
+### Dineen, Michael:
 * Originally Task: Do all front htmls and all realting css for the application.
 * Performed：Finish all original htmls and relating css; add accessibility, Tota11y.
 
-### Tian Chenyu
+### Tian, Chenyu
 * Originally Task: Do all routes part for the application.
 * Performed：Finish all route part; finish the middleware part; add security, xss; help for integration.
 
-### Nagel Liam
+### Nagel, Liam
 * Originally Task:Convert html pages to handlebar for the application.
 * Performed：Convert some htmls to handlebars, htmls validation.
 
