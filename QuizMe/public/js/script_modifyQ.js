@@ -3,7 +3,7 @@ $(document).ready(function () {
         let data = $("#CreateQues-form").serialize()
         try {
             let result = await axios.post('/QuizMeCreator/modifyQues', data)
-            console.log("Here is:", result)
+            // console.log("Here is:", result)
             let response = result.data
             if (response.success === true) {
                 location.href = "/QuizMeCreator/searchQuestion"

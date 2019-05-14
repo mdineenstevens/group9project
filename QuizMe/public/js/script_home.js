@@ -27,7 +27,7 @@ $(document).ready(function () {
             let result = await axios.post('/QuizMe/login', data)
             let response = result.data
             if (response.success === true) {
-                console.log(data_arr[0].value)
+                // console.log(data_arr[0].value)
                 if (data_arr[0].value === 'creator') {
                     location.href = "/QuizMeCreator"
                 } else if (data_arr[0].value === 'candidate') {

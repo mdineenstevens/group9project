@@ -253,7 +253,7 @@ router.post("/QuizSubmit", async (req, res) => {
         a1[0] = answerInfo.Submission;
         answerInfo.Submission = a1;
     }
-    console.log(answerInfo)
+    // console.log(answerInfo)
     const identity = req.session.user.identity;
     let quizId = req.session.Q_id;
     let Sub_ANS = answerInfo.Submission;
