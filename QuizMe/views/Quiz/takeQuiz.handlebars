@@ -91,7 +91,7 @@
         <div class="flex-center h-75">
             <div class="signin-header">
                 Quiz
-                <small>Time left: <span id="counter"></span> seconds</small>
+                <small>Time left: <span id="counter0"></span> : <span id="counter1"></span> </small>
             </div>
         </div>
         <div class="card mx-auto">
@@ -137,7 +137,10 @@
             }
             else {
                 counter --;
-                $('#counter').text(counter);
+                let counter0 = parseInt(counter/60);
+                let counter1 = counter%60;
+                $('#counter0').text(counter0);
+                $('#counter1').text(counter1);
             }
         }, 1000);
     })

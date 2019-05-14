@@ -27,14 +27,6 @@ router.get("/createQuestion",checkCreatorsLogin,async (req, res) => {
     });
 });
 
-// router.get("/takeQuiz", async (req, res) => {
-//     // res.send('Questions create Page');
-//     res.render('Quiz/takeQuiz',{
-//         title: "Quiz Start",
-//         Creator_path_CSS: true
-//     });
-// });
-
 router.get("/searchQuestion",checkCreatorsLogin,async (req, res) => {
     // res.send('Questions create Page');
     res.render('Question/searchQues',{
@@ -133,7 +125,7 @@ router.get('/deleteQues/:id',checkCurrent,async (req, res) => {
 
     req.session.Quesdelete = Quesresult;
 
-    console.log(Quesresult)
+    // console.log(Quesresult)
     res.render("Question/deleteQues",{
         title: "Delete Question",
         Ques: Quesresult,
@@ -156,26 +148,55 @@ router.post("/createQuestion", async (req, res) => {
     let option_arr = questionInfo.option;
     // console.log(option_arr[op_arr])
     answers.push(xss(option_arr[op_arr]));
+    console.log(answers);
     option_arr.splice(op_arr,1);
-    for(let i=0;i<option_arr.length;i++)
+    for(let i = 0; i < option_arr.length; i++)
     {
-        options[i] = xss(option_arr[i]);
+        if(xss(option_arr[i]) !== ""){
+            options.push(xss(option_arr[i]))
+        }
     }
-    
-      console.log('answers',answers,'options',options)
 
+    
     if(!content){
         res.status(400).json({ error: "Please provide the content." }).end();
         return;
-      }
+    }
+
+    if(options.length+answers.length<4){
+        res.status(400).json({ error: "Please make sure no empty option." }).end();
+        return;
+    }
+
+    if(answers[0]===""){
+        res.status(400).json({ error: "Please select an answer." }).end();
+        return;
+    }
+
     if(!answers){
         res.status(400).json({ error: "Please select an answer." }).end();
         return;
-      }
+    
+    }
     if(!options){
         res.status(400).json({ error: "Please provide your options." }).end();
         return;
-      }
+    }
+
+    for(let i=0; i < options.length;i=i+1){
+        if(answers[0]===options[i]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
+
+    for(let i=0; i < options.length;i=i+1){
+        for(let j=i+1; j < options.length;j=j+1)
+        if(options[i]===options[j]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
 
     if(!Array.isArray(answers)){
         let a1 = [];
@@ -219,7 +240,7 @@ router.post("/SearchResult",async (req, res) => {
     try{
         questionData = await questions.SearchByField(creatorId,field);
         // res.json(questionData);
-        console.log(questionData);
+        // console.log(questionData);
         res.render("Question/listQues",{
             title: "Question List",
             result: questionData,
@@ -233,9 +254,8 @@ router.post("/SearchResult",async (req, res) => {
 // /QuizMeCreator/modifyQues
 
 router.post("/modifyQues", async (req, res) => {
-    console.log(req.body)
-    // return res.send(req.body);
-    //get the question infomation frome request
+
+    //get the question infomation from request
     const newQuestionInfo = req.body;
     // console.log(newQuestionInfo)
     let questionId = req.session.QuesModify._id;
@@ -253,7 +273,7 @@ router.post("/modifyQues", async (req, res) => {
         if(newQuestionInfo.option[i] !== newQuestionInfo.op){
             // console.log(newQuestionInfo.option[i])
             if(newQuestionInfo.option[i] !== ""){
-                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
+                // console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
                 options.push(newQuestionInfo.option[i])
                 // console.log(options)
             }
@@ -305,7 +325,7 @@ router.post("/modifyQues", async (req, res) => {
         } );
 
         questionData = await questions.updateQuestion(questionId,content,answers,options);
-        console.log(questionData)
+        // console.log(questionData)
         //clean session
         req.session.QuesModify = undefined;
         // res.json(questionData);
