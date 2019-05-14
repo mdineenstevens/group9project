@@ -83,8 +83,12 @@
 2. For search question in creator part：
 * If you don't provide any keyword, then the default is to show all questions. And you can modify and delete question in the page.
 
-2. For starting a quiz in all user part：
+3. For starting a quiz in all user part：
 * If you don't provide any keyword, then the default is to random give you 5 question in the DB.
+
+## Proposals：
+* see in proposals file. There are several modifidacation, but all modification are informed and allowed by professor. Thank you for your understanding.
+
 
 
 
