@@ -1,8 +1,8 @@
 # group9project QuizMe
 ## How to initialize and run the project
-* step1:Please confirm that you have enabled mongoDB correctly, server url is default: "mongodb://localhost:27017/"
+* **step1**:Please confirm that you have enabled mongoDB correctly, server url is default: "mongodb://localhost:27017/"
 
-* step2:In the project directory, run npm script ‘npm run seed’ to initialize the database.Seeding takes you some time since the hashing password. When seeding, your terminal will show the process:
+* **step2**:In the project directory, run npm script ‘npm run seed’ to initialize the database.Seeding takes you some time since the hashing password. When seeding, your terminal will show the process:
 
 * //////////////////The candidates is finished//////////////////
 
@@ -24,29 +24,29 @@
 
 * The basic data include 4 candidates 5 creators and 100 questions, you can see the accout shown below:
 
-* candidate info1: username: Hangyu Wang, password: HWang2019;
+* **candidate info1**: username: Hangyu Wang, password: HWang2019;
 
-* candidate info2: username: Michael Dineen, password: MDineen2019;
+* **candidate info2**: username: Michael Dineen, password: MDineen2019;
 
-* candidate info3: username: Chenyu Tian, password: CTian2019;
+* **candidate info3**: username: Chenyu Tian, password: CTian2019;
 
-* candidate info4: username: Liam Nagel, password: LNagel2019;
+* **candidate info4**: username: Liam Nagel, password: LNagel2019;
 
-* creator info1: username: Turing, password: No1ModernCS;
+* **creator info1**: username: Turing, password: No1ModernCS;
 
-* creator info2: username: Gagarin, password: No1Astronaut;
+* **creator info2**: username: Gagarin, password: No1Astronaut;
 
-* creator info3: username: Mozart, password: No1Musician;
+* **creator info3**: username: Mozart, password: No1Musician;
 
-* creator info4: username: Darwin, password: No1Biologist;
+* **creator info4**: username: Darwin, password: No1Biologist;
 
-* creator info5: username: Van Gogh, password: No1Painter;
+* **creator info5**: username: Van Gogh, password: No1Painter;
 
 * more details in ./tasks/seed.js 
 
-* step3:In the project directory, run npm script ‘npm start’ to start QuizMe project.
+* **step3**:In the project directory, run npm script ‘npm start’ to start QuizMe project.
 
-* step4:The project will run on the http://localhost:3000/QuizMe 
+* **step4**:The project will run on the http://localhost:3000/QuizMe 
 
 ## Contribution for Project
 ### Wang Hangyu:
