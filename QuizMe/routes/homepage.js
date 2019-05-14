@@ -248,7 +248,12 @@ router.post("/takeQuiz", async (req, res) => {
 router.post("/QuizSubmit", async (req, res) => {
 
     const answerInfo = req.body;
-    // console.log(answerInfo)
+    if(!Array.isArray(answerInfo.Submission)){
+        let a1 = [];
+        a1[0] = answerInfo.Submission;
+        answerInfo.Submission = a1;
+    }
+    console.log(answerInfo)
     const identity = req.session.user.identity;
     let quizId = req.session.Q_id;
     let Sub_ANS = answerInfo.Submission;
