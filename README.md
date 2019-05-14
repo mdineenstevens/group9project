@@ -4,45 +4,45 @@
 
 * step2:In the project directory, run npm script ‘npm run seed’ to initialize the database.Seeding takes you some time since the hashing password. When seeding, your terminal will show the process:
 
-//////////////////The candidates is finished//////////////////
+* //////////////////The candidates is finished//////////////////
 
-//////////////////The creators is finished//////////////////
+* //////////////////The creators is finished//////////////////
 
-creator1 is finished.
+* creator1 is finished.
 
-creator2 is finished.
+* creator2 is finished.
 
-creator3 is finished.
+* creator3 is finished.
 
-creator4 is finished.
+* creator4 is finished.
 
-creator5 is finished.
+* creator5 is finished.
 
-SEEDING DONE.
+* SEEDING DONE.
 
-You do not need to terminate it since it will stop automatically. If you accidentally terminate it, and want to seed the task again. Please delete the DB named CS546_Group9 and then seed.
+* You do not need to terminate it since it will stop automatically. If you accidentally terminate it, and want to seed the task again. Please delete the DB named CS546_Group9 and then seed.
 
-The basic data include 4 candidates 5 creators and 100 questions, you can see the accout shown below:
+* The basic data include 4 candidates 5 creators and 100 questions, you can see the accout shown below:
 
-candidate info1: username: Hangyu Wang, password: HWang2019;
+* candidate info1: username: Hangyu Wang, password: HWang2019;
 
-candidate info2: username: Michael Dineen, password: MDineen2019;
+* candidate info2: username: Michael Dineen, password: MDineen2019;
 
-candidate info3: username: Chenyu Tian, password: CTian2019;
+* candidate info3: username: Chenyu Tian, password: CTian2019;
 
-candidate info4: username: Liam Nagel, password: LNagel2019;
+* candidate info4: username: Liam Nagel, password: LNagel2019;
 
-creator info1: username: Turing, password: No1ModernCS;
+* creator info1: username: Turing, password: No1ModernCS;
 
-creator info2: username: Gagarin, password: No1Astronaut;
+* creator info2: username: Gagarin, password: No1Astronaut;
 
-creator info3: username: Mozart, password: No1Musician;
+* creator info3: username: Mozart, password: No1Musician;
 
-creator info4: username: Darwin, password: No1Biologist;
+* creator info4: username: Darwin, password: No1Biologist;
 
-creator info4: username: Van Gogh, password: No1Painter;
+* creator info5: username: Van Gogh, password: No1Painter;
 
-more details in ./tasks/seed.js 
+* more details in ./tasks/seed.js 
 
 * step3:In the project directory, run npm script ‘npm start’ to start QuizMe project.
 
