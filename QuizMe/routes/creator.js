@@ -267,19 +267,28 @@ router.post("/modifyQues", async (req, res) => {
     // newQuestionInfo.option;
     // let questionData;
     
-    answers.push(newQuestionInfo.op)
-   
+    let temp_option = [];
+    temp_option.push(newQuestionInfo.option[1]);
+    temp_option.push(newQuestionInfo.option[2]);
+    temp_option.push(newQuestionInfo.option[3]);
+    temp_option.push(newQuestionInfo.option[0]);
+
+  
+    answers.push(temp_option[newQuestionInfo.op])
+
+    temp_option.splice(newQuestionInfo.op,1);
+    options = temp_option;
     
-    for(i=0;i < newQuestionInfo.option.length;i=i+1){
-        if(newQuestionInfo.option[i] !== newQuestionInfo.op){
-            // console.log(newQuestionInfo.option[i])
-            if(newQuestionInfo.option[i] !== ""){
-                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
-                options.push(newQuestionInfo.option[i])
-                // console.log(options)
-            }
-        }
-    }
+    // for(i=0;i < temp_option.length;i=i+1){
+    //     if(temp_option[i] !== answers[0]){
+    //         // console.log(newQuestionInfo.option[i])
+    //         if(temp_option[i] !== ""){
+    //             console.log(temp_option[i], temp_option[i] !== "")
+    //             options.push(temp_option[i])
+    //             // console.log(options)
+    //         }
+    //     }
+    // }
 
      console.log(answers, options)
 
@@ -290,21 +299,37 @@ router.post("/modifyQues", async (req, res) => {
 
 
     if(!questionId){
-        res.status(400).json({ error: "You must provide Effective questionId" }).end();
+        res.status(400).json({ error: "Please provide Effective questionId" }).end();
         return;
       }
     if(!content){
-        res.status(400).json({ error: "You must provide Effective content" }).end();
+        res.status(400).json({ error: "Please provide the content." }).end();
         return;
       }
     if(!answers){
-        res.status(400).json({ error: "You must provide Effective answers" }).end();
+        res.status(400).json({ error: "Please select an answer." }).end();
         return;
       }
     if(!options){
-        res.status(400).json({ error: "You must provide Effective options" }).end();
+        res.status(400).json({ error: "Please provide options." }).end();
         return;
       }
+
+    
+    for(let i=0; i < options.length;i=i+1){
+        if(answers[0]===options[i]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
+
+    for(let i=0; i < options.length;i=i+1){
+        for(let j=i+1; j < options.length;j=j+1)
+        if(options[i]===options[j]){
+            res.status(400).json({ error: "Please make sure no duplicate option." }).end();
+            return;
+        }
+    }
 
 
     if(!Array.isArray(answers)){
