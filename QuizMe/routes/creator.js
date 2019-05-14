@@ -265,22 +265,20 @@ router.post("/modifyQues", async (req, res) => {
     let options = [];
     // newQuestionInfo.option;
     // let questionData;
+    let op_arr = newQuestionInfo.op;
+    let option_arr = newQuestionInfo.option;
     
-    answers.push(newQuestionInfo.op)
+    answers.push(xss(newQuestionInfo.option[op_arr]));
    
-    
-    for(i=0;i < newQuestionInfo.option.length;i=i+1){
-        if(newQuestionInfo.option[i] !== newQuestionInfo.op){
-            // console.log(newQuestionInfo.option[i])
-            if(newQuestionInfo.option[i] !== ""){
-                // console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
-                options.push(newQuestionInfo.option[i])
-                // console.log(options)
-            }
+    option_arr.splice(op_arr,1);
+    for(let i = 0; i < option_arr.length; i++)
+    {
+        if(xss(option_arr[i]) !== ""){
+            options.push(xss(option_arr[i]))
         }
     }
-
-    // console.log(answers, options)
+    
+     console.log(answers, options)
 
     if((answers.length + options.length !== 4) || (newQuestionInfo.op === "")){
         res.status(400).json({ error: "Please make sure there is empty and duplicate option." }).end();
