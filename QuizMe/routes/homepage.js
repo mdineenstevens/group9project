@@ -210,13 +210,14 @@ router.post("/takeQuiz", async (req, res) => {
         // console.log(Ques_id)
         req.session.Q_id = quizData.Q_id;
         req.session.Ques_id = Ques_id;
-        if(identity = "candidate"){
+        // console.log(identity)
+        if(identity == "candidate"){
             res.render("Quiz/takeQuiz", {
                 Questions: quizData.Questions,
                 Creator_path_CSS: true,
                 candidate_type: true
             });
-        }else if(identity = "creator"){
+        }else if(identity == "creator"){
             res.render("Quiz/takeQuiz", {
                 Questions: quizData.Questions,
                 Creator_path_CSS: true,
