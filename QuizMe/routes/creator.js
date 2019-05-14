@@ -254,10 +254,11 @@ router.post("/SearchResult",async (req, res) => {
 // /QuizMeCreator/modifyQues
 
 router.post("/modifyQues", async (req, res) => {
-
-    //get the question infomation from request
+    console.log(req.body)
+    // return res.send(req.body);
+    //get the question infomation frome request
     const newQuestionInfo = req.body;
-    // console.log(newQuestionInfo)
+    console.log(newQuestionInfo)
     let questionId = req.session.QuesModify._id;
     let content = newQuestionInfo.Ques_content;
     let answers = [];
@@ -265,19 +266,21 @@ router.post("/modifyQues", async (req, res) => {
     let options = [];
     // newQuestionInfo.option;
     // let questionData;
-    let op_arr = newQuestionInfo.op;
-    let option_arr = newQuestionInfo.option;
     
-    answers.push(xss(newQuestionInfo.option[op_arr]));
+    answers.push(newQuestionInfo.op)
    
-    option_arr.splice(op_arr,1);
-    for(let i = 0; i < option_arr.length; i++)
-    {
-        if(xss(option_arr[i]) !== ""){
-            options.push(xss(option_arr[i]))
+    
+    for(i=0;i < newQuestionInfo.option.length;i=i+1){
+        if(newQuestionInfo.option[i] !== newQuestionInfo.op){
+            // console.log(newQuestionInfo.option[i])
+            if(newQuestionInfo.option[i] !== ""){
+                console.log(newQuestionInfo.option[i], newQuestionInfo.option[i] !== "")
+                options.push(newQuestionInfo.option[i])
+                // console.log(options)
+            }
         }
     }
-    
+
      console.log(answers, options)
 
     if((answers.length + options.length !== 4) || (newQuestionInfo.op === "")){
@@ -323,7 +326,7 @@ router.post("/modifyQues", async (req, res) => {
         } );
 
         questionData = await questions.updateQuestion(questionId,content,answers,options);
-        // console.log(questionData)
+        console.log(questionData)
         //clean session
         req.session.QuesModify = undefined;
         // res.json(questionData);
