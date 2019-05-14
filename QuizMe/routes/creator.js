@@ -148,7 +148,7 @@ router.post("/createQuestion", async (req, res) => {
     let option_arr = questionInfo.option;
     // console.log(option_arr[op_arr])
     answers.push(xss(option_arr[op_arr]));
-    console.log(answers);
+    // console.log(answers);
     option_arr.splice(op_arr,1);
     for(let i = 0; i < option_arr.length; i++)
     {
@@ -254,11 +254,11 @@ router.post("/SearchResult",async (req, res) => {
 // /QuizMeCreator/modifyQues
 
 router.post("/modifyQues", async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     // return res.send(req.body);
     //get the question infomation frome request
     const newQuestionInfo = req.body;
-    console.log(newQuestionInfo)
+    // console.log(newQuestionInfo)
     let questionId = req.session.QuesModify._id;
     let content = newQuestionInfo.Ques_content;
     let answers = [];
@@ -278,19 +278,8 @@ router.post("/modifyQues", async (req, res) => {
 
     temp_option.splice(xss(newQuestionInfo.op),1);
     options = temp_option;
-    
-    // for(i=0;i < temp_option.length;i=i+1){
-    //     if(temp_option[i] !== answers[0]){
-    //         // console.log(newQuestionInfo.option[i])
-    //         if(temp_option[i] !== ""){
-    //             console.log(temp_option[i], temp_option[i] !== "")
-    //             options.push(temp_option[i])
-    //             // console.log(options)
-    //         }
-    //     }
-    // }
 
-     console.log(answers, options)
+    //  console.log(answers, options)
 
     if((answers.length + options.length !== 4) || (xss(newQuestionInfo.op) === "")){
         res.status(400).json({ error: "Please make sure there is empty and duplicate option." }).end();
@@ -351,7 +340,7 @@ router.post("/modifyQues", async (req, res) => {
         } );
 
         questionData = await questions.updateQuestion(questionId,content,answers,options);
-        console.log(questionData)
+        // console.log(questionData)
         //clean session
         req.session.QuesModify = undefined;
         // res.json(questionData);

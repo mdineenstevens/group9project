@@ -132,7 +132,7 @@ router.post("/login", async (req, res) => {
 router.post("/accountUpdate",async (req, res) => {
     //get the Update infomation(name,OldPassword,NewPassword,identity) frome request
     const longinInfo = req.body;
-    console.log(longinInfo)
+    // console.log(longinInfo)
     // const name = longinInfo.username;
 
 
