@@ -268,15 +268,15 @@ router.post("/modifyQues", async (req, res) => {
     // let questionData;
     
     let temp_option = [];
-    temp_option.push(newQuestionInfo.option[1]);
-    temp_option.push(newQuestionInfo.option[2]);
-    temp_option.push(newQuestionInfo.option[3]);
-    temp_option.push(newQuestionInfo.option[0]);
+    temp_option.push(xss(newQuestionInfo.option[1]));
+    temp_option.push(xss(newQuestionInfo.option[2]));
+    temp_option.push(xss(newQuestionInfo.option[3]));
+    temp_option.push(xss(newQuestionInfo.option[0]));
 
   
-    answers.push(temp_option[newQuestionInfo.op])
+    answers.push(temp_option[xss(newQuestionInfo.op)]);
 
-    temp_option.splice(newQuestionInfo.op,1);
+    temp_option.splice(xss(newQuestionInfo.op),1);
     options = temp_option;
     
     // for(i=0;i < temp_option.length;i=i+1){
@@ -292,7 +292,7 @@ router.post("/modifyQues", async (req, res) => {
 
      console.log(answers, options)
 
-    if((answers.length + options.length !== 4) || (newQuestionInfo.op === "")){
+    if((answers.length + options.length !== 4) || (xss(newQuestionInfo.op) === "")){
         res.status(400).json({ error: "Please make sure there is empty and duplicate option." }).end();
         return;
     }
