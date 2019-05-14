@@ -1,4 +1,10 @@
 # group9project QuizMe
+
+## What environment we tried
+* npm version: 6.5.0
+* node version: 11.7.0, 12.0.0
+* browser: chrome, safari
+
 ## How to initialize and run the project
 * **step1**:Please confirm that you have enabled mongoDB correctly, server url is default: "mongodb://localhost:27017/"
 
