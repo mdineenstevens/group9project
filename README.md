@@ -20,8 +20,8 @@ creator5 is finished.
 
 SEEDING DONE.
 
+You do not need to terminate it since it will stop automatically. If you accidentally terminate it, and want to seed the task again. Please delete the DB named CS546_Group9 and then seed.
 
-it will generates some basic data to ensure that you can experience the QuizMe project normally.
 The basic data include 4 candidates 5 creators and 100 questions, you can see the detail in ./tasks/seed.js
 * step3:In the project directory, run npm script ‘npm start’ to start QuizMe project.
 * step4:The project will run on the http://localhost:3000/QuizMe 
