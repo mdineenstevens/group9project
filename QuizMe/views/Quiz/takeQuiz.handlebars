@@ -113,10 +113,8 @@
                     {{/each}}
                     <div class="form-group">
                         <div class="text-center buffer2">
-                            <button type="submit" class="btn btn-block btn-lg" style="background-color: #1e3799">
-                                <div class="white-text">
-                                    Submit
-                                </div>
+                            <button type="submit" class="btn-primary btn-block btn-lg" style="background-color: #1e3799">
+                                Submit
                             </button>
                         </div>
                     </div>
@@ -128,20 +126,20 @@
 
 <script>
     $(document).ready(function () {
-        let counter = {{Questions.length}} * 60;
-        let interval = setInterval(function () {
-            //console.log(counter)
-            if (counter == 0) {
-                $('#quiz-form').submit();
-                clearInterval(interval);
-            }
-            else {
-                counter --;
-                let counter0 = parseInt(counter/60);
-                let counter1 = counter%60;
-                $('#counter0').text(counter0);
-                $('#counter1').text(counter1);
-            }
-        }, 1000);
+        let counter = {{ Questions.length }} * 60;
+    let interval = setInterval(function () {
+        //console.log(counter)
+        if (counter == 0) {
+            $('#quiz-form').submit();
+            clearInterval(interval);
+        }
+        else {
+            counter--;
+            let counter0 = parseInt(counter / 60);
+            let counter1 = counter % 60;
+            $('#counter0').text(counter0);
+            $('#counter1').text(counter1);
+        }
+    }, 1000);
     })
 </script>
