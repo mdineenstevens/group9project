@@ -215,13 +215,15 @@ router.post("/takeQuiz", async (req, res) => {
             res.render("Quiz/takeQuiz", {
                 Questions: quizData.Questions,
                 Creator_path_CSS: true,
-                candidate_type: true
+                candidate_type: true,
+                title: "takeQuiz"
             });
         }else if(identity == "creator"){
             res.render("Quiz/takeQuiz", {
                 Questions: quizData.Questions,
                 Creator_path_CSS: true,
-                creator_type: true
+                creator_type: true,
+                title: "takeQuiz"
             });
         }
 
