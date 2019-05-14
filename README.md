@@ -65,7 +65,7 @@
 
 ### Tian, Chenyu
 * Originally Task: Do all routes part for the application.
-* Performed：Finish all route part; finish the middleware part; add security, xss; help for integration.
+* Performed：Finish all route part; finish the middleware part; add security, xss; assist on integration.
 
 ### Nagel, Liam
 * Originally Task:Convert html pages to handlebar for the application.
