@@ -8,7 +8,7 @@
 ## How to initialize and run the project
 * **step1**:Please confirm that you have enabled mongoDB correctly, server url is default: "mongodb://localhost:27017/"
 
-* **step2**:In the project directory, run npm script ‘npm run seed’ to initialize the database.Seeding takes you some time since the hashing password. When seeding, your terminal will show the process:
+* **step2**:In the project directory(QuizMe folder), run 'npm install', then run npm script 'npm run seed' to initialize the database. Seeding takes you some time because of the hashing password. When seeding, your terminal will show the process:
 
 * //////////////////The candidates is finished//////////////////
 
@@ -50,7 +50,7 @@
 
 * more details in ./tasks/seed.js 
 
-* **step3**:In the project directory, run npm script ‘npm start’ to start QuizMe project.
+* **step3**:In the project directory, run npm script 'npm start' to start QuizMe project.
 
 * **step4**:The project will run on the http://localhost:3000/QuizMe 
 
@@ -87,7 +87,7 @@
 * If you don't provide any keyword, then the default is to random give you 5 question in the DB.
 
 ## Proposals：
-* see in proposals file. There are several modifidacation, but all modification are informed and allowed by professor. Thank you for your understanding.
+* see in proposals folder. There are several modifidacations, but all modifications are informed and allowed by professor. Thank you for your understanding.
 
 ## Results：
 * All core functions are achieved.
