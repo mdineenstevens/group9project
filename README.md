@@ -1,7 +1,7 @@
 # group9project QuizMe
 ## How to initialize and run the project
 * step1:Please confirm that you have enabled mongoDB correctly, server url is default: "mongodb://localhost:27017/"
-* step2:In the project directory, run npm script ‘npm seed’ to initialize the database.
+* step2:In the project directory, run npm script ‘npm run seed’ to initialize the database.
 it will generates some basic data to ensure that you can experience the QuizMe project normally.
 The basic data include 4 candidates 5 creators and 100 questions, you can see the detail in ./tasks/seed.js
 * step3:In the project directory, run npm script ‘npm start’ to start QuizMe project.
@@ -16,13 +16,15 @@ The basic data include 4 candidates 5 creators and 100 questions, you can see th
 * Originally Task:Do all html and css for the application.
 * Performed：Do all html and css, Convert some html page to handlebar, Tota11y.
 
+### Tian Chenyu
+* Originally Task:Do all route part for the application.
+* Performed：Do all route part, Do the middleware part.
+
 ### Nagel Liam
 * Originally Task:Convert html page to handlebar for the application.
 * Performed：Convert some html page to handlebar,Html validation.
 
-### Tian Chenyu
-* Originally Task:Do all route part for the application.
-* Performed：Do all route part, Do the middleware part.
+
 
 ## Additional Instructions：
 1. For the access license management：
